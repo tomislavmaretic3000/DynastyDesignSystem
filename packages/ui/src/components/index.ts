@@ -30,6 +30,7 @@ export {
   FormHelperText,
   FormControlLabel,
   InputLabel,
+  InputAdornment,
   OutlinedInput,
   Checkbox,
   Radio,

@@ -62,7 +62,7 @@ export const ColorPalette: Story = {
           <Typography variant="subtitle2" gutterBottom>{name}</Typography>
           <Grid container spacing={1}>
             {Object.entries(palette).map(([scale, color]) => (
-              <Grid item key={scale} xs={1.2}>
+              <Grid item key={scale} xs={1}>
                 <ColorSwatch color={color as string} label={scale} />
               </Grid>
             ))}

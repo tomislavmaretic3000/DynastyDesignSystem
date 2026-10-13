@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions,
@@ -16,9 +16,9 @@ type Story = StoryObj
 
 function DialogWrapper({ title, content, maxWidth = 'sm', children }: {
   title: string
-  content: React.ReactNode
+  content: ReactNode
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg'
-  children?: React.ReactNode
+  children?: ReactNode
 }) {
   const [open, setOpen] = useState(false)
   return (

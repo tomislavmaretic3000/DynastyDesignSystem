@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Button, Menu, MenuItem, IconButton, Divider, ListItemIcon,
@@ -24,8 +24,8 @@ export default meta
 type Story = StoryObj
 
 function DropdownMenu({ trigger, items }: {
-  trigger: React.ReactNode
-  items: React.ReactNode
+  trigger: ReactNode
+  items: ReactNode
 }) {
   const [anchor, setAnchor] = useState<null | HTMLElement>(null)
   return (

@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Stack, Typography, Box } from '@dynasty-ds/ui'
-import Pagination from '@mui/material/Pagination'
-import PaginationItem from '@mui/material/PaginationItem'
+import { Stack, Typography, Box, Pagination, PaginationItem } from '@dynasty-ds/ui'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 

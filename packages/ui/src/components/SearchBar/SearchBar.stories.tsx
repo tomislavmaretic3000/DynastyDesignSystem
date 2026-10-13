@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   TextField, InputAdornment, IconButton, Stack, Box,
-  List, ListItem, ListItemText, ListItemIcon, Paper,
+  List, ListItem, ListItemButton, ListItemText, ListItemIcon, Paper,
   Typography, Chip, CircularProgress,
 } from '@dynasty-ds/ui'
 import SearchIcon from '@mui/icons-material/Search'
@@ -125,12 +125,12 @@ export const WithDropdownResults: Story = {
           >
             <List dense>
               {results.map((name) => (
-                <ListItem key={name} button onClick={() => setValue(name)}>
+                <ListItemButton key={name} onClick={() => setValue(name)}>
                   <ListItemIcon sx={{ minWidth: 36 }}>
                     <PersonIcon fontSize="small" />
                   </ListItemIcon>
                   <ListItemText primary={name} />
-                </ListItem>
+                </ListItemButton>
               ))}
             </List>
           </Paper>
@@ -166,19 +166,19 @@ export const WithSuggestionsPanel: Story = {
             <Typography variant="caption" color="text.secondary" sx={{ px: 1 }}>Recent</Typography>
             <List dense>
               {recent.map((item) => (
-                <ListItem key={item} button onClick={() => setValue(item)}>
+                <ListItemButton key={item} onClick={() => setValue(item)}>
                   <ListItemIcon sx={{ minWidth: 32 }}><HistoryIcon fontSize="small" color="action" /></ListItemIcon>
                   <ListItemText primary={item} primaryTypographyProps={{ variant: 'body2' }} />
-                </ListItem>
+                </ListItemButton>
               ))}
             </List>
             <Typography variant="caption" color="text.secondary" sx={{ px: 1 }}>Trending</Typography>
             <List dense>
               {trending.map((item) => (
-                <ListItem key={item} button onClick={() => setValue(item)}>
+                <ListItemButton key={item} onClick={() => setValue(item)}>
                   <ListItemIcon sx={{ minWidth: 32 }}><TrendingUpIcon fontSize="small" color="action" /></ListItemIcon>
                   <ListItemText primary={item} primaryTypographyProps={{ variant: 'body2' }} />
-                </ListItem>
+                </ListItemButton>
               ))}
             </List>
           </Paper>
