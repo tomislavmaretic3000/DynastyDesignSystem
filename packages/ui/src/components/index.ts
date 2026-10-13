@@ -15,6 +15,10 @@ export {
   MenuItem,
   Tabs,
   Tab,
+  Breadcrumbs,
+  Link,
+  Pagination,
+  PaginationItem,
   // Inputs
   Button,
   ButtonGroup,
