@@ -6,7 +6,6 @@ export {
   Box,
   Container,
   Grid,
-  Grid2,
   Stack,
   // Navigation
   AppBar,
