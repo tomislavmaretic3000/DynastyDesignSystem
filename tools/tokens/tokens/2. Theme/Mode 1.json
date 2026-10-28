@@ -1,4 +1,11 @@
 {
+  "shadows": {
+    "color": {
+      "$extensions": { "com.figma.hiddenFromPublishing": true },
+      "$type": "color",
+      "$value": "{colors.midnight.900}"
+    }
+  },
   "functional": {
     "main": {
       "error-light": {
@@ -13,7 +20,7 @@
           "com.figma.hiddenFromPublishing": true
         },
         "$type": "color",
-        "$value": "{colors.lime.50}"
+        "$value": "{colors.yellow.50}"
       },
       "success-light": {
         "$extensions": {
@@ -41,7 +48,7 @@
           "com.figma.hiddenFromPublishing": true
         },
         "$type": "color",
-        "$value": "{colors.lime.500}"
+        "$value": "{colors.yellow.500}"
       },
       "success": {
         "$extensions": {
@@ -69,7 +76,7 @@
           "com.figma.hiddenFromPublishing": true
         },
         "$type": "color",
-        "$value": "{colors.lime.600}"
+        "$value": "{colors.yellow.700}"
       },
       "success-dark": {
         "$extensions": {

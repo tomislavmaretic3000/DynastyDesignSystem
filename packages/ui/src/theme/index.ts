@@ -1,6 +1,50 @@
 import { createTheme } from '@mui/material/styles'
-import type { ThemeOptions } from '@mui/material/styles'
+import type { ThemeOptions, Shadows } from '@mui/material/styles'
 import { tokens } from '../tokens'
+
+// ─── Shadow system ────────────────────────────────────────────────────────────
+// Shadow color source: tokens.shadows.color (tools/tokens/tokens/2. Theme/Mode 1.json)
+// Adjust these three opacity values to tune intensity across all components.
+const shadowOpacity = {
+  sm: 0.06,  // lightest layer — e.g. Card resting
+  md: 0.10,  // mid layer — e.g. Popover, Menu
+  lg: 0.18,  // deepest layer — e.g. Modal, Drawer
+}
+
+// midnight-900 (#020c33) broken out as RGB for rgba() usage
+const sRgb = '2, 12, 51'
+const sh = (y: number, blur: number, a: number, spread = 0) =>
+  `0px ${y}px ${blur}px ${spread}px rgba(${sRgb}, ${a})`
+const { sm, md, lg } = shadowOpacity
+
+const systemShadows: Shadows = [
+  'none',
+  `${sh(1, 3,  sm)}, ${sh(1, 2,  sm / 2)}`,
+  `${sh(1, 5,  sm)}, ${sh(2, 2,  sm / 2)}`,
+  `${sh(1, 8,  md)}, ${sh(3, 4,  sm)}`,
+  `${sh(2, 4,  md, -1)}, ${sh(4, 5,  sm)}`,
+  `${sh(3, 5,  md, -1)}, ${sh(5, 8,  sm)}`,
+  `${sh(3, 5,  md, -1)}, ${sh(6, 10, sm)}`,
+  `${sh(4, 5,  md, -2)}, ${sh(7, 10, sm)}`,
+  `${sh(5, 5,  md, -3)}, ${sh(8, 10, sm)}`,
+  `${sh(5, 6,  md, -3)}, ${sh(9, 12, sm)}`,
+  `${sh(6, 6,  md, -3)}, ${sh(10, 14, sm)}`,
+  `${sh(6, 7,  md, -4)}, ${sh(11, 15, sm)}`,
+  `${sh(7, 8,  md, -4)}, ${sh(12, 17, sm)}`,
+  `${sh(7, 8,  md, -4)}, ${sh(13, 19, sm)}`,
+  `${sh(7, 9,  md, -4)}, ${sh(14, 21, sm)}`,
+  `${sh(8, 9,  md, -5)}, ${sh(15, 22, sm)}`,
+  `${sh(8, 10, md, -5)}, ${sh(16, 24, sm)}`,
+  `${sh(8, 11, md, -5)}, ${sh(17, 26, sm)}`,
+  `${sh(9, 11, md, -5)}, ${sh(18, 28, sm)}`,
+  `${sh(9, 12, md, -6)}, ${sh(19, 29, sm)}`,
+  `${sh(10, 13, md, -6)}, ${sh(20, 31, sm)}`,
+  `${sh(10, 13, md, -6)}, ${sh(21, 33, sm)}`,
+  `${sh(10, 14, md, -6)}, ${sh(22, 35, sm)}`,
+  `${sh(11, 14, md, -7)}, ${sh(23, 36, sm)}`,
+  `${sh(11, 15, lg, -7)}, ${sh(24, 38, md)}`,
+]
+// ─────────────────────────────────────────────────────────────────────────────
 
 const themeOptions: ThemeOptions = {
   palette: {
@@ -53,59 +97,83 @@ const themeOptions: ThemeOptions = {
   },
 
   typography: {
-    fontFamily: `"${tokens.fontFamilies.body}", "Roboto", "Helvetica", "Arial", sans-serif`,
+    fontFamily: `"Geist", "Helvetica", "Arial", sans-serif`,
     fontSize: Number(tokens.fontSizes.body),
     h1: {
-      fontFamily: `"${tokens.fontFamilies.heading}", sans-serif`,
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.h1,
       fontWeight: 700,
       lineHeight: 1.1,
-      letterSpacing: tokens.letterSpacing.decreased,
+      letterSpacing: '-0.03em',
     },
     h2: {
-      fontFamily: `"${tokens.fontFamilies.heading}", sans-serif`,
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.h2,
       fontWeight: 700,
-      lineHeight: 1.1,
-      letterSpacing: tokens.letterSpacing.decreased,
+      lineHeight: 1.15,
+      letterSpacing: '-0.02em',
     },
     h3: {
-      fontFamily: `"${tokens.fontFamilies.heading}", sans-serif`,
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.h3,
       fontWeight: 600,
       lineHeight: 1.2,
+      letterSpacing: '-0.01em',
     },
     h4: {
-      fontFamily: `"${tokens.fontFamilies.heading}", sans-serif`,
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.h4,
       fontWeight: 600,
       lineHeight: 1.3,
     },
     h5: {
-      fontFamily: `"${tokens.fontFamilies.heading}", sans-serif`,
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.h5,
       fontWeight: 600,
       lineHeight: 1.4,
     },
     h6: {
-      fontFamily: `"${tokens.fontFamilies.heading}", sans-serif`,
+      fontFamily: `"Geist", sans-serif`,
       fontSize: Number(tokens.fontSizes.h6),
       fontWeight: 600,
       lineHeight: 1.5,
     },
+    subtitle1: {
+      fontFamily: `"Geist", sans-serif`,
+      fontWeight: 500,
+    },
+    subtitle2: {
+      fontFamily: `"Geist", sans-serif`,
+      fontWeight: 500,
+    },
     body1: {
+      fontFamily: `"Geist", sans-serif`,
       fontSize: Number(tokens.fontSizes.body),
-      lineHeight: 1.5,
+      lineHeight: 1.6,
     },
     body2: {
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.sm,
-      lineHeight: 1.43,
+      lineHeight: 1.5,
     },
     caption: {
+      fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.xs,
       lineHeight: 1.4,
     },
+    overline: {
+      fontFamily: `"Geist", sans-serif`,
+      fontWeight: 600,
+      letterSpacing: '0.08em',
+    },
+    button: {
+      fontFamily: `"Geist", sans-serif`,
+      fontWeight: 600,
+      textTransform: 'none',
+    },
   },
+
+  shadows: systemShadows,
 
   shape: {
     borderRadius: tokens.radius['rounded-lg'], // 8px
@@ -132,7 +200,6 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           borderRadius: tokens.radius['rounded-xl'],
-          boxShadow: `0px 1px 3px 0px rgba(0,0,0,0.1), 0px 1px 2px 0px rgba(0,0,0,0.06)`,
         },
       },
     },
@@ -147,6 +214,58 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: {
           backgroundImage: 'none',
+        },
+      },
+    },
+    MuiAccordion: {
+      defaultProps: {
+        disableGutters: true,
+        square: true,
+        elevation: 0,
+      },
+      styleOverrides: {
+        root: {
+          borderTop: `1px solid ${tokens.border.main.default}`,
+          '&:last-of-type': {
+            borderBottom: `1px solid ${tokens.border.main.default}`,
+          },
+          '&::before': { display: 'none' },
+          background: 'transparent',
+        },
+      },
+    },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: { padding: '0 16px' },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: { padding: '0 16px 16px' },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: `1px solid ${tokens.border.main.default}`,
+          borderLeft: 'none',
+          borderRight: 'none',
+        },
+        head: {
+          fontWeight: 600,
+          borderBottom: `2px solid ${tokens.border.main.dark}`,
+        },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          color: tokens.functional.main.info,
+          textDecorationColor: 'currentColor',
+          textUnderlineOffset: '3px',
+          '&:hover': {
+            color: tokens.functional.main['info-dark'],
+          },
         },
       },
     },
