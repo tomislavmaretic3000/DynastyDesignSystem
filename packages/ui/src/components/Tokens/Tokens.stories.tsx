@@ -126,20 +126,20 @@ export const Typography_: Story = {
   render: () => (
     <Stack spacing={2}>
       {[
-        { label: 'H1', size: tokens.fontSizes.h1, family: tokens.fontFamilies.heading },
-        { label: 'H2', size: tokens.fontSizes.h2, family: tokens.fontFamilies.heading },
-        { label: 'H3', size: tokens.fontSizes.h3, family: tokens.fontFamilies.heading },
-        { label: 'H4', size: tokens.fontSizes.h4, family: tokens.fontFamilies.heading },
-        { label: 'H5', size: tokens.fontSizes.h5, family: tokens.fontFamilies.heading },
-        { label: 'H6', size: tokens.fontSizes.h6, family: tokens.fontFamilies.heading },
-        { label: 'Body', size: tokens.fontSizes.body, family: tokens.fontFamilies.body },
-        { label: 'SM', size: tokens.fontSizes.sm, family: tokens.fontFamilies.body },
-        { label: 'XS', size: tokens.fontSizes.xs, family: tokens.fontFamilies.body },
-      ].map(({ label, size, family }) => (
+        { label: 'H1', size: tokens.fontSizes.h1 },
+        { label: 'H2', size: tokens.fontSizes.h2 },
+        { label: 'H3', size: tokens.fontSizes.h3 },
+        { label: 'H4', size: tokens.fontSizes.h4 },
+        { label: 'H5', size: tokens.fontSizes.h5 },
+        { label: 'H6', size: tokens.fontSizes.h6 },
+        { label: 'Body', size: tokens.fontSizes.body },
+        { label: 'SM', size: tokens.fontSizes.sm },
+        { label: 'XS', size: tokens.fontSizes.xs },
+      ].map(({ label, size }) => (
         <Stack key={label} direction="row" alignItems="baseline" spacing={3}>
           <Typography variant="caption" color="text.secondary" sx={{ width: 40 }}>{label}</Typography>
-          <Typography variant="caption" color="text.disabled" sx={{ width: 60 }}>{size}px · {family}</Typography>
-          <Typography sx={{ fontSize: size, fontFamily: family }}>
+          <Typography variant="caption" color="text.disabled" sx={{ width: 60 }}>{size}px · Geist</Typography>
+          <Typography sx={{ fontSize: size, fontFamily: '"Geist", sans-serif' }}>
             The quick brown fox
           </Typography>
         </Stack>
@@ -159,6 +159,30 @@ export const Spacing_: Story = {
           <Box sx={{ height: 8, bgcolor: 'primary.main', borderRadius: 0.5, width: Number(value) }} />
         </Stack>
       ))}
+    </Stack>
+  ),
+}
+
+export const Elevation_: Story = {
+  name: 'Elevation & Shadows',
+  render: () => (
+    <Stack spacing={3}>
+      <Typography variant="caption" color="text.secondary">
+        Adjust <code>shadowOpacity</code> in <code>packages/ui/src/theme/index.ts</code> to tune all levels at once.
+      </Typography>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
+        {[0, 1, 2, 3, 4, 6, 8, 12, 16, 24].map((level) => (
+          <Stack key={level} alignItems="center" spacing={1.5}>
+            <Paper
+              elevation={level}
+              sx={{ width: 88, height: 88, borderRadius: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >
+              <Typography variant="caption" color="text.secondary" fontWeight={600}>{level}</Typography>
+            </Paper>
+            <Typography variant="caption" color="text.disabled">elevation {level}</Typography>
+          </Stack>
+        ))}
+      </Box>
     </Stack>
   ),
 }

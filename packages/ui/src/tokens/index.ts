@@ -452,7 +452,8 @@ export const tokens = {
     "cyan": "#00adcf"
   },
   "shadows": {
-    "default": "#1a202c"
+    "default": "#1a202c",
+    "color": "#020c33"
   },
   "font": {
     "weight": {
@@ -638,15 +639,15 @@ export const tokens = {
   "functional": {
     "main": {
       "error-light": "#fce9e9",
-      "warning-light": "#f7fbef",
+      "warning-light": "#fef7e6",
       "success-light": "#e6f9f1",
       "info-light": "#e8f1fd",
       "error": "#c81e1e",
-      "warning": "#b0d361",
+      "warning": "#e3a008",
       "success": "#27b178",
       "info": "#1a73e8",
       "error-dark": "#781212",
-      "warning-dark": "#95bf35",
+      "warning-dark": "#8a6105",
       "success-dark": "#00611b",
       "info-dark": "#0e448b"
     },
@@ -668,12 +669,12 @@ export const tokens = {
     "success": "#27b178",
     "info": "#1a73e8",
     "error": "#c81e1e",
-    "warning-light": "#f7fbef",
-    "warning": "#b0d361",
+    "warning-light": "#fef7e6",
+    "warning": "#e3a008",
     "success-light": "#e6f9f1",
     "info-light": "#e8f1fd",
     "error-dark": "#781212",
-    "warning-dark": "#95bf35",
+    "warning-dark": "#8a6105",
     "success-dark": "#00611b",
     "info-dark": "#0e448b"
   },
