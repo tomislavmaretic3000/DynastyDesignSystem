@@ -4,7 +4,7 @@ import {
   Accordion, AccordionSummary, AccordionDetails,
   Typography, Stack, Box, Divider, Chip,
 } from '@dynasty-ds/ui'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+
 
 const meta: Meta<typeof Accordion> = {
   title: 'Components/Surfaces/Accordion',
@@ -20,7 +20,7 @@ export const Default: Story = {
   render: () => (
     <Box sx={{ maxWidth: 560 }}>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <Typography fontWeight={500}>What is Dynasty Design System?</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -30,7 +30,7 @@ export const Default: Story = {
         </AccordionDetails>
       </Accordion>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <Typography fontWeight={500}>How do I install it?</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -40,7 +40,7 @@ export const Default: Story = {
         </AccordionDetails>
       </Accordion>
       <Accordion>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <Typography fontWeight={500}>Where do I report bugs?</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -67,7 +67,7 @@ export const ControlledExpansion: Story = {
       <Box sx={{ maxWidth: 560 }}>
         {panels.map(({ id, title, content }) => (
           <Accordion key={id} expanded={expanded === id} onChange={toggle(id)}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <AccordionSummary>
               <Typography fontWeight={expanded === id ? 600 : 400}>{title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -84,7 +84,7 @@ export const WithSubheading: Story = {
   render: () => (
     <Box sx={{ maxWidth: 560 }}>
       <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ width: '100%', mr: 1 }}>
             <Typography fontWeight={500}>Integrations</Typography>
             <Chip label="3 active" size="small" color="success" />
@@ -109,7 +109,7 @@ export const DisabledPanel: Story = {
   render: () => (
     <Box sx={{ maxWidth: 560 }}>
       <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <Typography fontWeight={500}>Available</Typography>
         </AccordionSummary>
         <AccordionDetails>
@@ -117,7 +117,7 @@ export const DisabledPanel: Story = {
         </AccordionDetails>
       </Accordion>
       <Accordion disabled>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <AccordionSummary>
           <Typography>Disabled panel</Typography>
         </AccordionSummary>
         <AccordionDetails>

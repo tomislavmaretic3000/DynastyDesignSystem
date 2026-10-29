@@ -1,3 +1,4 @@
+import { MagnifyingGlass, X, ClockCounterClockwise, TrendUp, User } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
@@ -5,11 +6,11 @@ import {
   List, ListItem, ListItemButton, ListItemText, ListItemIcon, Paper,
   Typography, Chip, CircularProgress,
 } from '@dynasty-ds/ui'
-import SearchIcon from '@mui/icons-material/Search'
-import ClearIcon from '@mui/icons-material/Clear'
-import HistoryIcon from '@mui/icons-material/History'
-import TrendingUpIcon from '@mui/icons-material/TrendingUp'
-import PersonIcon from '@mui/icons-material/Person'
+
+
+
+
+
 
 const meta: Meta = {
   title: 'Components/Inputs/Search Bar',
@@ -30,7 +31,7 @@ export const Default: Story = {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon color="action" />
+              <MagnifyingGlass color="action" />
             </InputAdornment>
           ),
         }}
@@ -53,13 +54,13 @@ export const WithClear: Story = {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon color="action" />
+                <MagnifyingGlass color="action" />
               </InputAdornment>
             ),
             endAdornment: value ? (
               <InputAdornment position="end">
                 <IconButton size="small" onClick={() => setValue('')}>
-                  <ClearIcon fontSize="small" />
+                  <X fontSize="small" />
                 </IconButton>
               </InputAdornment>
             ) : null,
@@ -79,7 +80,7 @@ export const Sizes: Story = {
         variant="outlined"
         size="small"
         InputProps={{
-          startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small" color="action" /></InputAdornment>,
+          startAdornment: <InputAdornment position="start"><MagnifyingGlass fontSize="small" color="action" /></InputAdornment>,
         }}
       />
       <TextField
@@ -88,7 +89,7 @@ export const Sizes: Story = {
         variant="outlined"
         size="medium"
         InputProps={{
-          startAdornment: <InputAdornment position="start"><SearchIcon color="action" /></InputAdornment>,
+          startAdornment: <InputAdornment position="start"><MagnifyingGlass color="action" /></InputAdornment>,
         }}
       />
     </Stack>
@@ -110,10 +111,10 @@ export const WithDropdownResults: Story = {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           InputProps={{
-            startAdornment: <InputAdornment position="start"><SearchIcon color="action" /></InputAdornment>,
+            startAdornment: <InputAdornment position="start"><MagnifyingGlass color="action" /></InputAdornment>,
             endAdornment: value ? (
               <InputAdornment position="end">
-                <IconButton size="small" onClick={() => setValue('')}><ClearIcon fontSize="small" /></IconButton>
+                <IconButton size="small" onClick={() => setValue('')}><X fontSize="small" /></IconButton>
               </InputAdornment>
             ) : null,
           }}
@@ -127,7 +128,7 @@ export const WithDropdownResults: Story = {
               {results.map((name) => (
                 <ListItemButton key={name} onClick={() => setValue(name)}>
                   <ListItemIcon sx={{ minWidth: 36 }}>
-                    <PersonIcon fontSize="small" />
+                    <User fontSize="small" />
                   </ListItemIcon>
                   <ListItemText primary={name} />
                 </ListItemButton>
@@ -158,7 +159,7 @@ export const WithSuggestionsPanel: Story = {
           onFocus={() => setFocused(true)}
           onBlur={() => setTimeout(() => setFocused(false), 200)}
           InputProps={{
-            startAdornment: <InputAdornment position="start"><SearchIcon color="action" /></InputAdornment>,
+            startAdornment: <InputAdornment position="start"><MagnifyingGlass color="action" /></InputAdornment>,
           }}
         />
         {focused && !value && (
@@ -167,7 +168,7 @@ export const WithSuggestionsPanel: Story = {
             <List dense>
               {recent.map((item) => (
                 <ListItemButton key={item} onClick={() => setValue(item)}>
-                  <ListItemIcon sx={{ minWidth: 32 }}><HistoryIcon fontSize="small" color="action" /></ListItemIcon>
+                  <ListItemIcon sx={{ minWidth: 32 }}><ClockCounterClockwise fontSize="small" color="action" /></ListItemIcon>
                   <ListItemText primary={item} primaryTypographyProps={{ variant: 'body2' }} />
                 </ListItemButton>
               ))}
@@ -176,7 +177,7 @@ export const WithSuggestionsPanel: Story = {
             <List dense>
               {trending.map((item) => (
                 <ListItemButton key={item} onClick={() => setValue(item)}>
-                  <ListItemIcon sx={{ minWidth: 32 }}><TrendingUpIcon fontSize="small" color="action" /></ListItemIcon>
+                  <ListItemIcon sx={{ minWidth: 32 }}><TrendUp fontSize="small" color="action" /></ListItemIcon>
                   <ListItemText primary={item} primaryTypographyProps={{ variant: 'body2' }} />
                 </ListItemButton>
               ))}
@@ -197,7 +198,7 @@ export const Loading: Story = {
         variant="outlined"
         defaultValue="design sys"
         InputProps={{
-          startAdornment: <InputAdornment position="start"><SearchIcon color="action" /></InputAdornment>,
+          startAdornment: <InputAdornment position="start"><MagnifyingGlass color="action" /></InputAdornment>,
           endAdornment: <InputAdornment position="end"><CircularProgress size={20} /></InputAdornment>,
         }}
       />
@@ -223,7 +224,7 @@ export const FilterChips: Story = {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           InputProps={{
-            startAdornment: <InputAdornment position="start"><SearchIcon fontSize="small" color="action" /></InputAdornment>,
+            startAdornment: <InputAdornment position="start"><MagnifyingGlass fontSize="small" color="action" /></InputAdornment>,
           }}
           sx={{ mb: 1.5 }}
         />

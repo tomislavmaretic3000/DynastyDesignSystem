@@ -1,8 +1,9 @@
+import { Trash, Plus, Info } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Tooltip, Button, IconButton, Stack, Box, Typography, Fab, Chip } from '@dynasty-ds/ui'
-import DeleteIcon from '@mui/icons-material/Delete'
-import AddIcon from '@mui/icons-material/Add'
-import InfoIcon from '@mui/icons-material/Info'
+
+
+
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Components/Data Display/Tooltip',
@@ -64,7 +65,7 @@ export const RichContent: Story = {
         </Stack>
       }
     >
-      <Button variant="outlined" startIcon={<InfoIcon />}>Rich tooltip</Button>
+      <Button variant="outlined" startIcon={<Info />}>Rich tooltip</Button>
     </Tooltip>
   ),
 }
@@ -73,10 +74,10 @@ export const OnIcons: Story = {
   render: () => (
     <Stack direction="row" spacing={1}>
       <Tooltip title="Delete item">
-        <IconButton color="error"><DeleteIcon /></IconButton>
+        <IconButton color="error"><Trash /></IconButton>
       </Tooltip>
       <Tooltip title="Add new">
-        <Fab size="small" color="primary"><AddIcon /></Fab>
+        <Fab size="small" color="primary"><Plus /></Fab>
       </Tooltip>
       <Tooltip title="Pro plan only" arrow>
         <span>

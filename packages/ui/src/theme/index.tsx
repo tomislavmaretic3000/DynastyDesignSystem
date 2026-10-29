@@ -1,6 +1,28 @@
 import { createTheme } from '@mui/material/styles'
 import type { ThemeOptions, Shadows } from '@mui/material/styles'
+import '@mui/x-date-pickers/themeAugmentation'
+import {
+  CaretDown,
+  Square,
+  CheckSquare,
+  MinusSquare,
+  CheckCircle,
+  Warning,
+  XCircle,
+  Info,
+  X,
+  Star,
+  CalendarBlank,
+  Clock,
+} from '@phosphor-icons/react'
 import { tokens } from '../tokens'
+
+// Stable wrappers for MUI icon slots — bold weight matches global IconContext default
+function SelectIcon({ className }: { className?: string }) {
+  return <CaretDown className={className} size={20} weight="bold" />
+}
+function CalendarIcon() { return <CalendarBlank size={20} weight="bold" /> }
+function ClockIcon() { return <Clock size={20} weight="bold" /> }
 
 // ─── Shadow system ────────────────────────────────────────────────────────────
 // Shadow color source: tokens.shadows.color (tools/tokens/tokens/2. Theme/Mode 1.json)
@@ -168,7 +190,7 @@ const themeOptions: ThemeOptions = {
     },
     button: {
       fontFamily: `"Geist", sans-serif`,
-      fontWeight: 600,
+      fontWeight: 400,
       textTransform: 'none',
     },
   },
@@ -182,21 +204,87 @@ const themeOptions: ThemeOptions = {
   spacing: 4, // base unit: 4px — matches tokens spacing.4 = 4, spacing.8 = 8, etc.
 
   components: {
+    MuiIconButton: {
+      defaultProps: { disableRipple: true },
+      styleOverrides: {
+        root: {
+          borderRadius: tokens.radius['rounded-md'],
+          '&:hover': {
+            backgroundColor: 'transparent',
+            color: tokens.colors.midnight[700],
+          },
+        },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
           borderRadius: tokens.radius['rounded-lg'],
           textTransform: 'none',
-          fontWeight: 600,
+          fontWeight: 400,
+          paddingLeft: '16px',
+          paddingRight: '16px',
+          '@media (prefers-reduced-motion: no-preference)': {
+            transition: 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease, transform 80ms ease',
+            '&:active': { transform: 'scale(0.96)' },
+          },
+        },
+        containedPrimary: {
+          '&:hover': { backgroundColor: tokens.colors.midnight[700] },
         },
       },
     },
     MuiTextField: {
       defaultProps: {
         variant: 'outlined',
+        InputLabelProps: { shrink: true },
+      },
+    },
+    MuiInputLabel: {
+      defaultProps: { shrink: true },
+      styleOverrides: {
+        root: {
+          position: 'relative',
+          transform: 'none',
+          transformOrigin: 'unset',
+          maxWidth: '100%',
+          pointerEvents: 'auto',
+          fontSize: tokens.fontSizes.sm,
+          fontWeight: 500,
+          color: tokens.fg.muted,
+          marginBottom: '6px',
+          '&.MuiInputLabel-shrink': { transform: 'none', maxWidth: '100%' },
+          '&.Mui-error': { color: tokens.functional.main.error },
+          '&.Mui-disabled': { color: tokens.fg.subtle },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: tokens.colors.zinc[600],
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: tokens.border.main.focus,      // midnight.500 — clear but not midnight.900
+            borderWidth: 2,
+          },
+          '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+            borderColor: tokens.functional.main.error,
+          },
+          '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
+            borderColor: tokens.border.main.default,
+          },
+        },
+        notchedOutline: {
+          top: 0,
+          borderColor: tokens.colors.zinc[500],           // zinc.500 — visible but not active-looking
+          '& legend': { display: 'none' },
+        },
       },
     },
     MuiCard: {
+      defaultProps: { elevation: 2 },
       styleOverrides: {
         root: {
           borderRadius: tokens.radius['rounded-xl'],
@@ -205,15 +293,102 @@ const themeOptions: ThemeOptions = {
     },
     MuiChip: {
       styleOverrides: {
-        root: {
+        root: ({ ownerState }: { ownerState: { color?: string; variant?: string } }) => ({
           borderRadius: tokens.radius['rounded-md'],
-        },
+          ...(ownerState.variant !== 'outlined' && ownerState.color === 'success' && {
+            backgroundColor: tokens.functional.main['success-light'],
+            color: tokens.functional.main['success-dark'],
+          }),
+          ...(ownerState.variant !== 'outlined' && ownerState.color === 'error' && {
+            backgroundColor: tokens.functional.main['error-light'],
+            color: tokens.functional.main['error-dark'],
+          }),
+          ...(ownerState.variant !== 'outlined' && ownerState.color === 'warning' && {
+            backgroundColor: tokens.functional.main['warning-light'],
+            color: tokens.functional.main['warning-dark'],
+          }),
+          ...(ownerState.variant !== 'outlined' && ownerState.color === 'info' && {
+            backgroundColor: tokens.functional.main['info-light'],
+            color: tokens.functional.main['info-dark'],
+          }),
+          ...(ownerState.variant !== 'outlined' && ownerState.color === 'primary' && {
+            backgroundColor: tokens.background.main.primary.light,
+            color: tokens.colors.midnight[700],
+          }),
+        }),
       },
     },
     MuiPaper: {
       styleOverrides: {
         root: {
           backgroundImage: 'none',
+        },
+      },
+    },
+    MuiSwitch: {
+      styleOverrides: {
+        root: {
+          width: 52,
+          height: 32,
+          padding: 0,
+          overflow: 'hidden',
+          flexShrink: 0,
+          '&.MuiSwitch-sizeSmall': {
+            width: 36,
+            height: 22,
+          },
+        },
+        switchBase: {
+          padding: 3,
+          margin: 0,
+          '&.Mui-checked': {
+            color: '#fff',
+            transform: 'translateX(20px)',
+            margin: 0,
+          },
+          '.MuiSwitch-sizeSmall &': {
+            padding: 2,
+            '&.Mui-checked': {
+              transform: 'translateX(14px)',
+            },
+          },
+        },
+        thumb: {
+          width: 26,
+          height: 26,
+          backgroundColor: '#fff',
+          boxShadow: `0 2px 4px rgba(${sRgb}, 0.15)`,
+          '.MuiSwitch-sizeSmall &': {
+            width: 18,
+            height: 18,
+            boxShadow: `0 1px 3px rgba(${sRgb}, 0.15)`,
+          },
+        },
+        track: {
+          borderRadius: 16,
+          opacity: 1,
+          backgroundColor: tokens.colors.zinc[300],
+          '.Mui-checked + &': {
+            opacity: 1,
+            backgroundColor: tokens.colors.midnight[700],
+          },
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          marginLeft: 0,          // MUI default is -11px to compensate for ripple padding; reset since our controls define their own spacing
+          gap: tokens.spacing[8],
+        },
+      },
+    },
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: tokens.fontSizes.sm,  // match label size
+          marginLeft: 0,                  // align with label, not input interior
+          marginTop: tokens.spacing[4],
         },
       },
     },
@@ -235,6 +410,9 @@ const themeOptions: ThemeOptions = {
       },
     },
     MuiAccordionSummary: {
+      defaultProps: {
+        expandIcon: <CaretDown size={20} weight="bold" />,
+      },
       styleOverrides: {
         root: { padding: '0 16px' },
       },
@@ -255,6 +433,77 @@ const themeOptions: ThemeOptions = {
           fontWeight: 600,
           borderBottom: `2px solid ${tokens.border.main.dark}`,
         },
+      },
+    },
+    MuiDatePicker: {
+      defaultProps: {
+        slots: { openPickerIcon: CalendarIcon },
+      },
+    },
+    MuiDateTimePicker: {
+      defaultProps: {
+        slots: { openPickerIcon: CalendarIcon },
+      },
+    },
+    MuiTimePicker: {
+      defaultProps: {
+        slots: { openPickerIcon: ClockIcon },
+      },
+    },
+    MuiSelect: {
+      defaultProps: {
+        IconComponent: SelectIcon,
+      },
+      styleOverrides: {
+        icon: { fontSize: '20px' },
+      },
+    },
+    MuiNativeSelect: {
+      defaultProps: {
+        IconComponent: SelectIcon,
+      },
+    },
+    MuiCheckbox: {
+      defaultProps: {
+        disableRipple: true,
+        icon: <Square size={22} weight="light" />,
+        checkedIcon: <CheckSquare size={22} weight="fill" />,
+        indeterminateIcon: <MinusSquare size={22} weight="fill" />,
+      },
+      styleOverrides: {
+        root: {
+          padding: 0,
+          color: tokens.colors.zinc[400],
+          '&:hover': {
+            backgroundColor: 'transparent',
+            color: tokens.colors.midnight[700],
+          },
+          '&.MuiCheckbox-colorPrimary:not(.Mui-checked):not(.MuiCheckbox-indeterminate)': {
+            color: tokens.colors.zinc[400],
+          },
+        },
+      },
+    },
+    MuiAlert: {
+      defaultProps: {
+        iconMapping: {
+          success: <CheckCircle size={22} weight="fill" />,
+          warning: <Warning size={22} weight="fill" />,
+          error: <XCircle size={22} weight="fill" />,
+          info: <Info size={22} weight="fill" />,
+        },
+      },
+    },
+    MuiAutocomplete: {
+      defaultProps: {
+        popupIcon: <CaretDown size={20} weight="bold" />,
+        clearIcon: <X size={16} weight="bold" />,
+      },
+    },
+    MuiRating: {
+      defaultProps: {
+        icon: <Star size={24} weight="fill" />,
+        emptyIcon: <Star size={24} weight="bold" />,
       },
     },
     MuiLink: {

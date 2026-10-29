@@ -1,18 +1,19 @@
+import { CopySimple, FloppyDisk, Printer, ShareNetwork, PencilSimple, X } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { SpeedDial, SpeedDialAction, SpeedDialIcon, Box, Typography } from '@dynasty-ds/ui'
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined'
-import SaveIcon from '@mui/icons-material/Save'
-import PrintIcon from '@mui/icons-material/Print'
-import ShareIcon from '@mui/icons-material/Share'
-import EditIcon from '@mui/icons-material/Edit'
-import CloseIcon from '@mui/icons-material/Close'
+
+
+
+
+
+
 
 const actions = [
-  { icon: <FileCopyIcon />, name: 'Copy' },
-  { icon: <SaveIcon />, name: 'Save' },
-  { icon: <PrintIcon />, name: 'Print' },
-  { icon: <ShareIcon />, name: 'Share' },
+  { icon: <CopySimple />, name: 'Copy' },
+  { icon: <FloppyDisk />, name: 'Save' },
+  { icon: <Printer />, name: 'Print' },
+  { icon: <ShareNetwork />, name: 'Share' },
 ]
 
 const meta: Meta<typeof SpeedDial> = {
@@ -63,7 +64,7 @@ export const CustomIcon: Story = {
       <SpeedDial
         ariaLabel="SpeedDial custom icon"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon openIcon={<CloseIcon />} icon={<EditIcon />} />}
+        icon={<SpeedDialIcon openIcon={<X />} icon={<PencilSimple />} />}
         color="secondary"
       >
         {actions.map((a) => (

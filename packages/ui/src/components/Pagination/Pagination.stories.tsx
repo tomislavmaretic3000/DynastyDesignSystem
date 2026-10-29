@@ -1,8 +1,9 @@
+import { ArrowLeft, ArrowRight } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Stack, Typography, Box, Pagination, PaginationItem } from '@dynasty-ds/ui'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+
+
 
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Navigation/Pagination',
@@ -93,7 +94,7 @@ export const CustomPrevNext: Story = {
       color="primary"
       renderItem={(item) => (
         <PaginationItem
-          slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
+          slots={{ previous: ArrowLeft, next: ArrowRight }}
           {...item}
         />
       )}

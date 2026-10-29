@@ -1,7 +1,8 @@
+import { Folder, User } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Avatar, AvatarGroup, Stack, Badge, Typography, Box } from '@dynasty-ds/ui'
-import FolderIcon from '@mui/icons-material/Folder'
-import PersonIcon from '@mui/icons-material/Person'
+
+
 
 const meta: Meta<typeof Avatar> = {
   title: 'Components/Data Display/Avatar',
@@ -30,7 +31,7 @@ export const Types: Story = {
     <Stack direction="row" spacing={2} alignItems="center">
       <Avatar src="https://i.pravatar.cc/80?img=3" alt="Photo" />
       <Avatar>AB</Avatar>
-      <Avatar><PersonIcon /></Avatar>
+      <Avatar><User /></Avatar>
       <Avatar sx={{ bgcolor: 'transparent', color: 'inherit', border: '1px dashed', borderColor: 'divider' }}>?</Avatar>
     </Stack>
   ),
