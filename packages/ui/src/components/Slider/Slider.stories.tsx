@@ -1,8 +1,9 @@
+import { SpeakerLow, SpeakerHigh } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Slider, Stack, Box, Typography } from '@dynasty-ds/ui'
-import VolumeDownIcon from '@mui/icons-material/VolumeDown'
-import VolumeUpIcon from '@mui/icons-material/VolumeUp'
+
+
 
 const meta: Meta<typeof Slider> = {
   title: 'Components/Inputs/Slider',
@@ -110,13 +111,13 @@ export const VolumeControl: Story = {
     const [volume, setVolume] = useState(60)
     return (
       <Stack direction="row" spacing={2} alignItems="center" sx={{ maxWidth: 360 }}>
-        <VolumeDownIcon color="action" />
+        <SpeakerLow color="action" />
         <Slider
           value={volume}
           onChange={(_, v) => setVolume(v as number)}
           aria-label="Volume"
         />
-        <VolumeUpIcon color="action" />
+        <SpeakerHigh color="action" />
       </Stack>
     )
   },

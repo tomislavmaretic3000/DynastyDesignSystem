@@ -1,9 +1,10 @@
+import { Plus, PencilSimple, NavigationArrow, Heart } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Fab, Stack, Box, Tooltip } from '@dynasty-ds/ui'
-import AddIcon from '@mui/icons-material/Add'
-import EditIcon from '@mui/icons-material/Edit'
-import NavigationIcon from '@mui/icons-material/Navigation'
-import FavoriteIcon from '@mui/icons-material/Favorite'
+
+
+
+
 
 const meta: Meta<typeof Fab> = {
   title: 'Components/Inputs/FAB',
@@ -24,16 +25,16 @@ export const Default: Story = {
   render: () => (
     <Stack direction="row" spacing={2} alignItems="center">
       <Fab color="primary" aria-label="add">
-        <AddIcon />
+        <Plus />
       </Fab>
       <Fab color="secondary" aria-label="edit">
-        <EditIcon />
+        <PencilSimple />
       </Fab>
       <Fab aria-label="favorite">
-        <FavoriteIcon />
+        <Heart />
       </Fab>
       <Fab disabled aria-label="disabled">
-        <AddIcon />
+        <Plus />
       </Fab>
     </Stack>
   ),
@@ -43,15 +44,15 @@ export const Extended: Story = {
   render: () => (
     <Stack direction="row" spacing={2} alignItems="center">
       <Fab variant="extended" color="primary">
-        <NavigationIcon sx={{ mr: 1 }} />
+        <NavigationArrow sx={{ mr: 1 }} />
         Navigate
       </Fab>
       <Fab variant="extended" color="secondary">
-        <AddIcon sx={{ mr: 1 }} />
+        <Plus sx={{ mr: 1 }} />
         Create
       </Fab>
       <Fab variant="extended" disabled>
-        <EditIcon sx={{ mr: 1 }} />
+        <PencilSimple sx={{ mr: 1 }} />
         Disabled
       </Fab>
     </Stack>
@@ -62,13 +63,13 @@ export const Sizes: Story = {
   render: () => (
     <Stack direction="row" spacing={2} alignItems="center">
       <Fab size="small" color="primary" aria-label="add small">
-        <AddIcon fontSize="small" />
+        <Plus fontSize="small" />
       </Fab>
       <Fab size="medium" color="primary" aria-label="add medium">
-        <AddIcon />
+        <Plus />
       </Fab>
       <Fab size="large" color="primary" aria-label="add large">
-        <AddIcon />
+        <Plus />
       </Fab>
     </Stack>
   ),
@@ -80,7 +81,7 @@ export const Colors: Story = {
       {(['primary', 'secondary', 'error', 'warning', 'info', 'success'] as const).map((color) => (
         <Tooltip key={color} title={color} placement="top">
           <Fab color={color} aria-label={color}>
-            <AddIcon />
+            <Plus />
           </Fab>
         </Tooltip>
       ))}
@@ -105,7 +106,7 @@ export const PageContext: Story = {
         aria-label="add"
         sx={{ position: 'absolute', bottom: 16, right: 16 }}
       >
-        <AddIcon />
+        <Plus />
       </Fab>
     </Box>
   ),

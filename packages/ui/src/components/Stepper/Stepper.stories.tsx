@@ -1,12 +1,13 @@
+import { CaretLeft, CaretRight, CheckCircle } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Stepper, Step, StepLabel, StepContent,
   Button, Typography, Box, Stack, Paper, MobileStepper,
 } from '@dynasty-ds/ui'
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+
+
+
 
 const meta: Meta<typeof Stepper> = {
   title: 'Components/Navigation/Stepper',
@@ -103,7 +104,7 @@ export const Vertical: Story = {
         {active === vertSteps.length && (
           <Paper variant="outlined" sx={{ p: 2, mt: 2, borderRadius: 2 }}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <CheckCircleIcon color="success" fontSize="small" />
+              <CheckCircle color="success" fontSize="small" />
               <Typography variant="body2">All steps completed!</Typography>
             </Stack>
             <Button size="small" onClick={() => setActive(0)} sx={{ mt: 1 }}>Reset</Button>
@@ -131,12 +132,12 @@ export const Mobile: Story = {
           activeStep={active}
           nextButton={
             <Button size="small" onClick={() => setActive((p) => p + 1)} disabled={active === steps.length - 1}>
-              Next <KeyboardArrowRightIcon />
+              Next <CaretRight />
             </Button>
           }
           backButton={
             <Button size="small" onClick={() => setActive((p) => p - 1)} disabled={active === 0}>
-              <KeyboardArrowLeftIcon /> Back
+              <CaretLeft /> Back
             </Button>
           }
         />

@@ -1,14 +1,15 @@
+import { TextB, TextItalic, TextUnderline, TextAlignLeft, TextAlignCenter, TextAlignRight, Rows, SquaresFour } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { ToggleButton, ToggleButtonGroup, Stack, Box } from '@dynasty-ds/ui'
-import FormatBoldIcon from '@mui/icons-material/FormatBold'
-import FormatItalicIcon from '@mui/icons-material/FormatItalic'
-import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
-import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft'
-import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter'
-import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight'
-import ViewListIcon from '@mui/icons-material/ViewList'
-import ViewModuleIcon from '@mui/icons-material/ViewModule'
+
+
+
+
+
+
+
+
 
 const meta: Meta<typeof ToggleButtonGroup> = {
   title: 'Components/Inputs/Toggle Button',
@@ -30,9 +31,9 @@ export const Default: Story = {
         onChange={(_, v) => v && setAlignment(v)}
         aria-label="text alignment"
       >
-        <ToggleButton value="left" aria-label="left aligned"><FormatAlignLeftIcon /></ToggleButton>
-        <ToggleButton value="center" aria-label="centered"><FormatAlignCenterIcon /></ToggleButton>
-        <ToggleButton value="right" aria-label="right aligned"><FormatAlignRightIcon /></ToggleButton>
+        <ToggleButton value="left" aria-label="left aligned"><TextAlignLeft /></ToggleButton>
+        <ToggleButton value="center" aria-label="centered"><TextAlignCenter /></ToggleButton>
+        <ToggleButton value="right" aria-label="right aligned"><TextAlignRight /></ToggleButton>
       </ToggleButtonGroup>
     )
   },
@@ -47,9 +48,9 @@ export const MultiSelect: Story = {
         onChange={(_, v) => setFormats(v)}
         aria-label="text formatting"
       >
-        <ToggleButton value="bold" aria-label="bold"><FormatBoldIcon /></ToggleButton>
-        <ToggleButton value="italic" aria-label="italic"><FormatItalicIcon /></ToggleButton>
-        <ToggleButton value="underlined" aria-label="underlined"><FormatUnderlinedIcon /></ToggleButton>
+        <ToggleButton value="bold" aria-label="bold"><TextB /></ToggleButton>
+        <ToggleButton value="italic" aria-label="italic"><TextItalic /></ToggleButton>
+        <ToggleButton value="underlined" aria-label="underlined"><TextUnderline /></ToggleButton>
       </ToggleButtonGroup>
     )
   },
@@ -60,9 +61,9 @@ export const Sizes: Story = {
     <Stack spacing={2}>
       {(['small', 'medium', 'large'] as const).map((size) => (
         <ToggleButtonGroup key={size} size={size} value="left" exclusive aria-label={`${size} alignment`}>
-          <ToggleButton value="left"><FormatAlignLeftIcon /></ToggleButton>
-          <ToggleButton value="center"><FormatAlignCenterIcon /></ToggleButton>
-          <ToggleButton value="right"><FormatAlignRightIcon /></ToggleButton>
+          <ToggleButton value="left"><TextAlignLeft /></ToggleButton>
+          <ToggleButton value="center"><TextAlignCenter /></ToggleButton>
+          <ToggleButton value="right"><TextAlignRight /></ToggleButton>
         </ToggleButtonGroup>
       ))}
     </Stack>
@@ -100,11 +101,11 @@ export const ViewToggle: Story = {
         size="small"
       >
         <ToggleButton value="list" aria-label="list view">
-          <ViewListIcon fontSize="small" sx={{ mr: 0.5 }} />
+          <Rows fontSize="small" sx={{ mr: 0.5 }} />
           List
         </ToggleButton>
         <ToggleButton value="grid" aria-label="grid view">
-          <ViewModuleIcon fontSize="small" sx={{ mr: 0.5 }} />
+          <SquaresFour fontSize="small" sx={{ mr: 0.5 }} />
           Grid
         </ToggleButton>
       </ToggleButtonGroup>
@@ -117,9 +118,9 @@ export const Colors: Story = {
     <Stack spacing={2}>
       {(['standard', 'primary', 'secondary'] as const).map((color) => (
         <ToggleButtonGroup key={color} value="left" exclusive color={color} size="small">
-          <ToggleButton value="left"><FormatAlignLeftIcon /></ToggleButton>
-          <ToggleButton value="center"><FormatAlignCenterIcon /></ToggleButton>
-          <ToggleButton value="right"><FormatAlignRightIcon /></ToggleButton>
+          <ToggleButton value="left"><TextAlignLeft /></ToggleButton>
+          <ToggleButton value="center"><TextAlignCenter /></ToggleButton>
+          <ToggleButton value="right"><TextAlignRight /></ToggleButton>
         </ToggleButtonGroup>
       ))}
     </Stack>

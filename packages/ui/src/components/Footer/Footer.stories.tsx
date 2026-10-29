@@ -1,11 +1,12 @@
+import { TwitterLogo, LinkedinLogo, GithubLogo } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Box, Container, Grid, Stack, Typography, Link, Divider,
   IconButton,
 } from '@dynasty-ds/ui'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import LinkedInIcon from '@mui/icons-material/LinkedIn'
-import GitHubIcon from '@mui/icons-material/GitHub'
+
+
+
 
 const meta: Meta = {
   title: 'Components/Layout/Footer',
@@ -68,9 +69,9 @@ export const WithColumns: Story = {
               A MUI v5-based design system for building consistent, accessible interfaces faster.
             </Typography>
             <Stack direction="row" spacing={1}>
-              <IconButton size="small" href="#"><TwitterIcon fontSize="small" /></IconButton>
-              <IconButton size="small" href="#"><LinkedInIcon fontSize="small" /></IconButton>
-              <IconButton size="small" href="#"><GitHubIcon fontSize="small" /></IconButton>
+              <IconButton size="small" href="#"><TwitterLogo fontSize="small" /></IconButton>
+              <IconButton size="small" href="#"><LinkedinLogo fontSize="small" /></IconButton>
+              <IconButton size="small" href="#"><GithubLogo fontSize="small" /></IconButton>
             </Stack>
           </Grid>
 
@@ -121,13 +122,13 @@ export const Dark: Story = {
             </Typography>
             <Stack direction="row" spacing={1}>
               <IconButton size="small" sx={{ color: 'inherit', opacity: 0.7, '&:hover': { opacity: 1 } }}>
-                <TwitterIcon fontSize="small" />
+                <TwitterLogo fontSize="small" />
               </IconButton>
               <IconButton size="small" sx={{ color: 'inherit', opacity: 0.7, '&:hover': { opacity: 1 } }}>
-                <LinkedInIcon fontSize="small" />
+                <LinkedinLogo fontSize="small" />
               </IconButton>
               <IconButton size="small" sx={{ color: 'inherit', opacity: 0.7, '&:hover': { opacity: 1 } }}>
-                <GitHubIcon fontSize="small" />
+                <GithubLogo fontSize="small" />
               </IconButton>
             </Stack>
           </Grid>

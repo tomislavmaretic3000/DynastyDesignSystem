@@ -3,9 +3,7 @@ import {
   Card, CardContent, CardHeader, CardActions, CardMedia, CardActionArea,
   Button, Typography, Avatar, IconButton, Grid, Chip, Stack, Box,
 } from '@dynasty-ds/ui'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
+import { DotsThreeVertical, Heart, ShareNetwork } from '@phosphor-icons/react'
 
 const meta: Meta<typeof Card> = {
   title: 'Components/Surfaces/Card',
@@ -35,7 +33,7 @@ export const WithHeader: Story = {
     <Card sx={{ maxWidth: 360 }}>
       <CardHeader
         avatar={<Avatar sx={{ bgcolor: 'primary.main' }}>R</Avatar>}
-        action={<IconButton><MoreVertIcon /></IconButton>}
+        action={<IconButton><DotsThreeVertical size={20} /></IconButton>}
         title="Card Title"
         subheader="September 14, 2026"
       />
@@ -45,8 +43,8 @@ export const WithHeader: Story = {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites"><FavoriteIcon /></IconButton>
-        <IconButton aria-label="share"><ShareIcon /></IconButton>
+        <IconButton aria-label="add to favorites"><Heart size={20} /></IconButton>
+        <IconButton aria-label="share"><ShareNetwork size={20} /></IconButton>
       </CardActions>
     </Card>
   ),

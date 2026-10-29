@@ -1,7 +1,8 @@
+import { Smiley, Check } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Chip, Stack, Avatar } from '@dynasty-ds/ui'
-import FaceIcon from '@mui/icons-material/Face'
-import DoneIcon from '@mui/icons-material/Done'
+
+
 
 const meta: Meta<typeof Chip> = {
   title: 'Components/Data Display/Chip',
@@ -77,7 +78,7 @@ export const WithAvatar: Story = {
     <Stack direction="row" spacing={1}>
       <Chip avatar={<Avatar>M</Avatar>} label="Avatar" />
       <Chip avatar={<Avatar alt="Natacha" src="https://i.pravatar.cc/40?img=1" />} label="Natacha" />
-      <Chip icon={<FaceIcon />} label="With Icon" />
+      <Chip icon={<Smiley />} label="With Icon" />
     </Stack>
   ),
 }
@@ -86,7 +87,7 @@ export const Deletable: Story = {
   render: () => (
     <Stack direction="row" spacing={1}>
       <Chip label="Deletable" onDelete={() => {}} />
-      <Chip label="Custom icon" onDelete={() => {}} deleteIcon={<DoneIcon />} />
+      <Chip label="Custom icon" onDelete={() => {}} deleteIcon={<Check />} />
       <Chip label="Outlined" variant="outlined" onDelete={() => {}} />
     </Stack>
   ),

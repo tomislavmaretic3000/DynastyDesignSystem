@@ -5,7 +5,7 @@ import {
   Tooltip, Button, Stack, Box, Typography, Card, CardContent,
   IconButton,
 } from '@dynasty-ds/ui'
-import CloseIcon from '@mui/icons-material/Close'
+import { X } from '@phosphor-icons/react'
 
 const meta: Meta = {
   title: 'Components/Feedback/Loading & Progress',
