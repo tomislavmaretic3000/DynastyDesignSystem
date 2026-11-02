@@ -3,6 +3,8 @@
 import { useRef, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 import { SxProps, Theme } from '@mui/material/styles'
+import { tokens } from '../../tokens'
+import { controlHeightSm } from '../../theme'
 
 export type SegmentedTabItem<T extends string = string> = {
   value: T
@@ -17,8 +19,6 @@ type SegmentedTabsProps<T extends string> = {
   sx?: SxProps<Theme>
 }
 
-// Height matches MUI TextField size="small" (40px) so it aligns inline with inputs.
-const TAB_HEIGHT = 40
 
 export function SegmentedTabs<T extends string>({
   tabs,
@@ -60,16 +60,15 @@ export function SegmentedTabs<T extends string>({
         position: 'relative',
         display: 'flex',
         width: 'max-content',
-        height: TAB_HEIGHT,
+        height: controlHeightSm,
         border: '1px solid',
         borderColor: 'divider',
         borderRadius: 1,
-        overflow: 'hidden',
-        bgcolor: 'grey.50',
+        bgcolor: 'background.default',
         ...sx,
       }}
     >
-      <span ref={pillRef} className="seg-tabs-pill" />
+      <span ref={pillRef} className="seg-tabs-pill" style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.06))' }} />
       {tabs.map(({ value: v, label, count }) => (
         <Box
           key={v}
@@ -86,8 +85,8 @@ export function SegmentedTabs<T extends string>({
             cursor: 'pointer',
             height: '100%',
             px: 5,
-            fontSize: 14,
-            fontWeight: value === v ? 600 : 400,
+            fontSize: tokens.fontSizes.sm,
+            fontWeight: 400,
             color: value === v ? 'text.primary' : 'text.secondary',
             transition: 'color var(--tabs-dur) var(--tabs-ease)',
             '&:hover': { color: 'text.primary' },
@@ -100,7 +99,7 @@ export function SegmentedTabs<T extends string>({
         >
           <Box component="span" sx={{ whiteSpace: 'nowrap', flex: 'none' }}>{label}</Box>
           {count !== undefined && (
-            <Typography component="span" variant="body2" sx={{ fontWeight: 'inherit', whiteSpace: 'nowrap', flex: 'none' }}>
+            <Typography component="span" variant="body2" sx={{ whiteSpace: 'nowrap', flex: 'none' }}>
               ({count})
             </Typography>
           )}
