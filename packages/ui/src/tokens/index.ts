@@ -356,10 +356,10 @@ export const tokens = {
     "h2": "26"
   },
   "fontWeights": {
-    "headingRegular": "Regular",
-    "headingBold": "Bold",
-    "bodyRegular": "Regular",
-    "bodyBold": "Bold"
+    "headingRegular": 500,
+    "headingBold": 700,
+    "bodyRegular": 400,
+    "bodyBold": 700
   },
   "fontSizes": {
     "h1": 49,
@@ -375,7 +375,7 @@ export const tokens = {
   "fg": {
     "default": "#000000",
     "muted": "#4a5568",
-    "subtle": "#a0aec0"
+    "subtle": "#6b7280"
   },
   "bg": {
     "default": "#ffffff",
@@ -638,18 +638,18 @@ export const tokens = {
   },
   "functional": {
     "main": {
-      "error-light": "#fce9e9",
-      "warning-light": "#fef7e6",
-      "success-light": "#e6f9f1",
-      "info-light": "#e8f1fd",
-      "error": "#c81e1e",
-      "warning": "#e3a008",
-      "success": "#27b178",
-      "info": "#1a73e8",
-      "error-dark": "#781212",
-      "warning-dark": "#8a6105",
-      "success-dark": "#00611b",
-      "info-dark": "#0e448b"
+      "error-light": "#FFECEE",
+      "warning-light": "#FFF6F0",
+      "success-light": "#EBFBF6",
+      "info-light": "#E9F2FE",
+      "error": "#FF4454",
+      "warning": "#FFA268",
+      "success": "#39D8A3",
+      "info": "#1F7BF7",
+      "error-dark": "#6B1F24",
+      "warning-dark": "#6A4A3A",
+      "success-dark": "#1B5A4A",
+      "info-dark": "#1B4A6B"
     },
     "inverse": {
       "error-light": "#280606",
