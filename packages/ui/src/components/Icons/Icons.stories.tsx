@@ -1,130 +1,120 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { Box, Grid, Stack, Typography, TextField, Tooltip, Chip } from '@dynasty-ds/ui'
-import HomeIcon from '@mui/icons-material/Home'
-import SettingsIcon from '@mui/icons-material/Settings'
-import PersonIcon from '@mui/icons-material/Person'
-import NotificationsIcon from '@mui/icons-material/Notifications'
-import SearchIcon from '@mui/icons-material/Search'
-import AddIcon from '@mui/icons-material/Add'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
-import SaveIcon from '@mui/icons-material/Save'
-import CloseIcon from '@mui/icons-material/Close'
-import CheckIcon from '@mui/icons-material/Check'
-import WarningIcon from '@mui/icons-material/Warning'
-import ErrorIcon from '@mui/icons-material/Error'
-import InfoIcon from '@mui/icons-material/Info'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import MenuIcon from '@mui/icons-material/Menu'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import StarIcon from '@mui/icons-material/Star'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import ShareIcon from '@mui/icons-material/Share'
-import DownloadIcon from '@mui/icons-material/Download'
-import UploadIcon from '@mui/icons-material/Upload'
-import FilterListIcon from '@mui/icons-material/FilterList'
-import SortIcon from '@mui/icons-material/Sort'
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import BarChartIcon from '@mui/icons-material/BarChart'
-import EmailIcon from '@mui/icons-material/Email'
-import PhoneIcon from '@mui/icons-material/Phone'
-import LockIcon from '@mui/icons-material/Lock'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
-import RefreshIcon from '@mui/icons-material/Refresh'
-import LogoutIcon from '@mui/icons-material/Logout'
+import { Box, Grid, Stack, Typography, TextField, Tooltip } from '@dynasty-ds/ui'
+import {
+  House, Gear, User, Bell, MagnifyingGlass, Plus, PencilSimple, Trash,
+  FloppyDisk, X, Check, Warning, XCircle, Info, CheckCircle,
+  ArrowLeft, ArrowRight, CaretDown, List, DotsThreeVertical,
+  Star, Heart, ShareNetwork, DownloadSimple, UploadSimple,
+  Funnel, ArrowsDownUp, SquaresFour, File, Folder, Image,
+  Lock, Envelope, Phone, MapPin, Calendar, Clock, Tag,
+  ChartBar, ChartLine, ChartPie, CurrencyDollar, Package,
+  ArrowUp, ArrowDown, ArrowCircleRight, Spinner,
+  Eye, EyeSlash, Copy, Link, Scissors, Clipboard,
+  SmileyWink, Lightning, Rocket, Shield, Globe,
+} from '@phosphor-icons/react'
+import type { Icon } from '@phosphor-icons/react'
 
 const meta: Meta = {
-  title: 'Components/Data Display/Icons',
+  title: 'Design System/Icons',
   parameters: { layout: 'padded' },
 }
-
 export default meta
 type Story = StoryObj
 
-const iconGroups = [
+const groups: { name: string; icons: [string, Icon][] }[] = [
   {
-    label: 'Navigation',
+    name: 'Navigation & Actions',
     icons: [
-      { icon: <HomeIcon />, name: 'Home' },
-      { icon: <DashboardIcon />, name: 'Dashboard' },
-      { icon: <ArrowBackIcon />, name: 'ArrowBack' },
-      { icon: <ArrowForwardIcon />, name: 'ArrowForward' },
-      { icon: <ExpandMoreIcon />, name: 'ExpandMore' },
-      { icon: <MenuIcon />, name: 'Menu' },
+      ['House', House], ['ArrowLeft', ArrowLeft], ['ArrowRight', ArrowRight],
+      ['ArrowUp', ArrowUp], ['ArrowDown', ArrowDown], ['CaretDown', CaretDown],
+      ['List', List], ['DotsThreeVertical', DotsThreeVertical],
+      ['ArrowCircleRight', ArrowCircleRight],
     ],
   },
   {
-    label: 'Actions',
+    name: 'Common Actions',
     icons: [
-      { icon: <AddIcon />, name: 'Add' },
-      { icon: <EditIcon />, name: 'Edit' },
-      { icon: <DeleteIcon />, name: 'Delete' },
-      { icon: <SaveIcon />, name: 'Save' },
-      { icon: <CloseIcon />, name: 'Close' },
-      { icon: <CheckIcon />, name: 'Check' },
-      { icon: <SearchIcon />, name: 'Search' },
-      { icon: <RefreshIcon />, name: 'Refresh' },
-      { icon: <ContentCopyIcon />, name: 'ContentCopy' },
-      { icon: <MoreVertIcon />, name: 'MoreVert' },
-      { icon: <FilterListIcon />, name: 'FilterList' },
-      { icon: <SortIcon />, name: 'Sort' },
+      ['Plus', Plus], ['X', X], ['Check', Check], ['PencilSimple', PencilSimple],
+      ['Trash', Trash], ['FloppyDisk', FloppyDisk], ['Copy', Copy],
+      ['Scissors', Scissors], ['Clipboard', Clipboard], ['Link', Link],
     ],
   },
   {
-    label: 'Status',
+    name: 'UI & Interface',
     icons: [
-      { icon: <CheckCircleIcon />, name: 'CheckCircle' },
-      { icon: <WarningIcon />, name: 'Warning' },
-      { icon: <ErrorIcon />, name: 'Error' },
-      { icon: <InfoIcon />, name: 'Info' },
+      ['MagnifyingGlass', MagnifyingGlass], ['Gear', Gear], ['Funnel', Funnel],
+      ['ArrowsDownUp', ArrowsDownUp], ['SquaresFour', SquaresFour],
+      ['Eye', Eye], ['EyeSlash', EyeSlash], ['Tag', Tag],
     ],
   },
   {
-    label: 'Social / Misc',
+    name: 'Status & Feedback',
     icons: [
-      { icon: <StarIcon />, name: 'Star' },
-      { icon: <FavoriteIcon />, name: 'Favorite' },
-      { icon: <ShareIcon />, name: 'Share' },
-      { icon: <NotificationsIcon />, name: 'Notifications' },
-      { icon: <DownloadIcon />, name: 'Download' },
-      { icon: <UploadIcon />, name: 'Upload' },
-      { icon: <BarChartIcon />, name: 'BarChart' },
+      ['CheckCircle', CheckCircle], ['Warning', Warning],
+      ['XCircle', XCircle], ['Info', Info], ['Spinner', Spinner],
+      ['Shield', Shield],
     ],
   },
   {
-    label: 'User / Auth',
+    name: 'People & Communication',
     icons: [
-      { icon: <PersonIcon />, name: 'Person' },
-      { icon: <EmailIcon />, name: 'Email' },
-      { icon: <PhoneIcon />, name: 'Phone' },
-      { icon: <LockIcon />, name: 'Lock' },
-      { icon: <VisibilityIcon />, name: 'Visibility' },
-      { icon: <VisibilityOffIcon />, name: 'VisibilityOff' },
-      { icon: <LogoutIcon />, name: 'Logout' },
-      { icon: <SettingsIcon />, name: 'Settings' },
+      ['User', User], ['Bell', Bell], ['Envelope', Envelope],
+      ['Phone', Phone], ['ShareNetwork', ShareNetwork], ['Globe', Globe],
+    ],
+  },
+  {
+    name: 'Files & Media',
+    icons: [
+      ['File', File], ['Folder', Folder], ['Image', Image],
+      ['DownloadSimple', DownloadSimple], ['UploadSimple', UploadSimple],
+    ],
+  },
+  {
+    name: 'Data & Finance',
+    icons: [
+      ['ChartBar', ChartBar], ['ChartLine', ChartLine], ['ChartPie', ChartPie],
+      ['CurrencyDollar', CurrencyDollar], ['Package', Package],
+    ],
+  },
+  {
+    name: 'Misc',
+    icons: [
+      ['Star', Star], ['Heart', Heart], ['Lock', Lock],
+      ['MapPin', MapPin], ['Calendar', Calendar], ['Clock', Clock],
+      ['SmileyWink', SmileyWink], ['Lightning', Lightning], ['Rocket', Rocket],
     ],
   },
 ]
 
-export const Catalog: Story = {
+const weights = ['thin', 'light', 'regular', 'bold', 'fill', 'duotone'] as const
+
+export const Gallery: Story = {
   render: () => (
-    <Stack spacing={4}>
-      {iconGroups.map(({ label, icons }) => (
-        <Box key={label}>
-          <Typography variant="subtitle2" gutterBottom>{label}</Typography>
-          <Grid container spacing={2}>
-            {icons.map(({ icon, name }) => (
-              <Grid item key={name}>
-                <Tooltip title={name}>
-                  <Stack alignItems="center" spacing={0.5} sx={{ width: 64, cursor: 'default' }}>
-                    <Box sx={{ color: 'text.secondary', display: 'flex' }}>{icon}</Box>
-                    <Typography variant="caption" color="text.disabled" sx={{ fontSize: 9, textAlign: 'center', lineHeight: 1.2 }}>{name}</Typography>
-                  </Stack>
+    <Stack spacing={5}>
+      {groups.map(({ name, icons }) => (
+        <Box key={name}>
+          <Typography variant="subtitle2" fontWeight={600} gutterBottom>{name}</Typography>
+          <Grid container spacing={1}>
+            {icons.map(([label, Icon]) => (
+              <Grid item key={label} xs={2} sm={1}>
+                <Tooltip title={label} placement="top">
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: 0.5,
+                      p: 1.5,
+                      borderRadius: 1,
+                      cursor: 'default',
+                      '&:hover': { bgcolor: 'action.hover' },
+                    }}
+                  >
+                    <Icon size={24} />
+                    <Typography variant="caption" color="text.disabled" sx={{ fontSize: 9, textAlign: 'center', lineHeight: 1.2 }}>
+                      {label}
+                    </Typography>
+                  </Box>
                 </Tooltip>
               </Grid>
             ))}
@@ -135,42 +125,73 @@ export const Catalog: Story = {
   ),
 }
 
-export const Sizes: Story = {
+export const Weights: Story = {
+  name: 'Icon Weights',
   render: () => (
-    <Stack direction="row" spacing={3} alignItems="center">
-      {(['small', 'medium', 'large'] as const).map((size) => (
-        <Stack key={size} alignItems="center" spacing={0.5}>
-          <HomeIcon fontSize={size} color="action" />
-          <Typography variant="caption" color="text.secondary">{size}</Typography>
+    <Stack spacing={3}>
+      <Typography variant="caption" color="text.secondary">
+        Phosphor icons ship 6 weights per icon. Use <code>regular</code> for UI, <code>bold</code> for emphasis, <code>fill</code> for active/selected states.
+      </Typography>
+      {weights.map((weight) => (
+        <Stack key={weight} direction="row" alignItems="center" spacing={3}>
+          <Typography variant="caption" color="text.secondary" sx={{ width: 64 }}>{weight}</Typography>
+          <Stack direction="row" spacing={2}>
+            {[House, Bell, CheckCircle, Star, Warning, Lock, Gear].map((Icon, i) => (
+              <Icon key={i} size={24} weight={weight} />
+            ))}
+          </Stack>
         </Stack>
       ))}
-      <Stack alignItems="center" spacing={0.5}>
-        <HomeIcon sx={{ fontSize: 40 }} color="action" />
-        <Typography variant="caption" color="text.secondary">custom 40px</Typography>
-      </Stack>
     </Stack>
   ),
 }
 
-export const Colors: Story = {
+export const Sizes: Story = {
+  name: 'Icon Sizes',
   render: () => (
-    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap">
-      {[
-        { color: 'inherit' as const, label: 'inherit' },
-        { color: 'action' as const, label: 'action' },
-        { color: 'disabled' as const, label: 'disabled' },
-        { color: 'primary' as const, label: 'primary' },
-        { color: 'secondary' as const, label: 'secondary' },
-        { color: 'error' as const, label: 'error' },
-        { color: 'warning' as const, label: 'warning' },
-        { color: 'info' as const, label: 'info' },
-        { color: 'success' as const, label: 'success' },
-      ].map(({ color, label }) => (
-        <Stack key={label} alignItems="center" spacing={0.5}>
-          <StarIcon color={color} />
-          <Typography variant="caption" color="text.disabled" sx={{ fontSize: 9 }}>{label}</Typography>
+    <Stack spacing={2}>
+      {[12, 16, 20, 24, 32, 40, 48].map((size) => (
+        <Stack key={size} direction="row" alignItems="center" spacing={3}>
+          <Typography variant="caption" color="text.secondary" sx={{ width: 32 }}>{size}px</Typography>
+          <House size={size} />
+          <Bell size={size} />
+          <CheckCircle size={size} />
+          <Star size={size} />
         </Stack>
       ))}
+    </Stack>
+  ),
+}
+
+export const InContext: Story = {
+  name: 'Icons in Context',
+  render: () => (
+    <Stack spacing={3} maxWidth={480}>
+      <TextField
+        label="Search"
+        placeholder="Search…"
+        InputProps={{ startAdornment: <MagnifyingGlass size={18} style={{ marginRight: 8, flexShrink: 0 }} /> }}
+      />
+      <Stack direction="row" spacing={1}>
+        {[
+          { label: 'Add item', icon: <Plus size={18} /> },
+          { label: 'Edit', icon: <PencilSimple size={18} /> },
+          { label: 'Delete', icon: <Trash size={18} /> },
+          { label: 'Share', icon: <ShareNetwork size={18} /> },
+        ].map(({ label, icon }) => (
+          <Box
+            key={label}
+            sx={{
+              display: 'inline-flex', alignItems: 'center', gap: 0.75,
+              px: 2, py: 1, borderRadius: 1, bgcolor: 'primary.light',
+              color: 'primary.main', cursor: 'pointer', fontSize: 13, fontWeight: 500,
+              '&:hover': { bgcolor: 'primary.main', color: 'primary.contrastText' },
+            }}
+          >
+            {icon}{label}
+          </Box>
+        ))}
+      </Stack>
     </Stack>
   ),
 }

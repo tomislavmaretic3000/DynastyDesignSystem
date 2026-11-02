@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Link, Stack, Typography, Box } from '@dynasty-ds/ui'
-import OpenInNewIcon from '@mui/icons-material/OpenInNew'
+import { ArrowSquareOut } from '@phosphor-icons/react'
 
 const meta: Meta<typeof Link> = {
   title: 'Components/Navigation/Link',
@@ -62,7 +62,7 @@ export const ExternalLink: Story = {
         sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
       >
         MUI Documentation
-        <OpenInNewIcon fontSize="small" />
+        <ArrowSquareOut fontSize="small" />
       </Link>
       <Link
         href="https://storybook.js.org"
@@ -72,7 +72,7 @@ export const ExternalLink: Story = {
         sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}
       >
         Storybook Docs
-        <OpenInNewIcon fontSize="small" />
+        <ArrowSquareOut fontSize="small" />
       </Link>
     </Stack>
   ),

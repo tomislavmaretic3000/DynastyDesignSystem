@@ -1,14 +1,15 @@
+import { Check, Code, Bug, Rocket, PenNib } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Timeline, TimelineItem, TimelineSeparator, TimelineConnector,
   TimelineContent, TimelineDot, TimelineOppositeContent,
 } from '@dynasty-ds/ui'
 import { Typography, Paper, Stack, Chip } from '@dynasty-ds/ui'
-import CheckIcon from '@mui/icons-material/Check'
-import CodeIcon from '@mui/icons-material/Code'
-import BugReportIcon from '@mui/icons-material/BugReport'
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import DesignServicesIcon from '@mui/icons-material/DesignServices'
+
+
+
+
+
 
 const meta: Meta<typeof Timeline> = {
   title: 'Components/Layout/Timeline',
@@ -95,10 +96,10 @@ export const WithIcons: Story = {
   render: () => (
     <Timeline sx={{ maxWidth: 480 }}>
       {[
-        { icon: <DesignServicesIcon fontSize="small" />, title: 'Design review', desc: 'Figma tokens exported and reviewed.', color: 'primary' as const, status: 'done' },
-        { icon: <CodeIcon fontSize="small" />, title: 'Implementation', desc: 'Components built with MUI v5.', color: 'secondary' as const, status: 'done' },
-        { icon: <BugReportIcon fontSize="small" />, title: 'QA testing', desc: 'Accessibility and cross-browser checks.', color: 'warning' as const, status: 'active' },
-        { icon: <RocketLaunchIcon fontSize="small" />, title: 'Release', desc: 'Publish to npm and update docs.', color: 'success' as const, status: 'pending' },
+        { icon: <PenNib fontSize="small" />, title: 'Design review', desc: 'Figma tokens exported and reviewed.', color: 'primary' as const, status: 'done' },
+        { icon: <Code fontSize="small" />, title: 'Implementation', desc: 'Components built with MUI v5.', color: 'secondary' as const, status: 'done' },
+        { icon: <Bug fontSize="small" />, title: 'QA testing', desc: 'Accessibility and cross-browser checks.', color: 'warning' as const, status: 'active' },
+        { icon: <Rocket fontSize="small" />, title: 'Release', desc: 'Publish to npm and update docs.', color: 'success' as const, status: 'pending' },
       ].map(({ icon, title, desc, color, status }) => (
         <TimelineItem key={title}>
           <TimelineSeparator>

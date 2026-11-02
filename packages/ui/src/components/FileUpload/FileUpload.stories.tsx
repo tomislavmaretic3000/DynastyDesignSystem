@@ -1,3 +1,4 @@
+import { UploadSimple, File, Image, Trash, CloudArrowUp, CheckCircle } from '@phosphor-icons/react'
 import { useState, useRef } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
@@ -5,12 +6,12 @@ import {
   List, ListItem, ListItemIcon, ListItemText, IconButton,
   Paper, Chip, Alert,
 } from '@dynasty-ds/ui'
-import UploadFileIcon from '@mui/icons-material/UploadFile'
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
-import ImageIcon from '@mui/icons-material/Image'
-import DeleteIcon from '@mui/icons-material/Delete'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+
+
+
+
+
+
 
 const meta: Meta = {
   title: 'Components/Inputs/File Upload',
@@ -42,7 +43,7 @@ export const ButtonTrigger: Story = {
         />
         <Button
           variant="outlined"
-          startIcon={<UploadFileIcon />}
+          startIcon={<UploadSimple />}
           onClick={() => ref.current?.click()}
         >
           Upload Files
@@ -54,12 +55,12 @@ export const ButtonTrigger: Story = {
                 key={file.name}
                 secondaryAction={
                   <IconButton size="small" edge="end" onClick={() => setFiles((f) => f.filter((x) => x !== file))}>
-                    <DeleteIcon fontSize="small" />
+                    <Trash fontSize="small" />
                   </IconButton>
                 }
               >
                 <ListItemIcon sx={{ minWidth: 36 }}>
-                  {file.type.startsWith('image/') ? <ImageIcon fontSize="small" color="primary" /> : <InsertDriveFileIcon fontSize="small" />}
+                  {file.type.startsWith('image/') ? <Image fontSize="small" color="primary" /> : <File fontSize="small" />}
                 </ListItemIcon>
                 <ListItemText
                   primary={file.name}
@@ -114,7 +115,7 @@ export const DropZone: Story = {
             '&:hover': { borderColor: 'primary.main', bgcolor: 'action.hover' },
           }}
         >
-          <CloudUploadIcon sx={{ fontSize: 40, color: 'text.secondary', mb: 1 }} />
+          <CloudArrowUp sx={{ fontSize: 40, color: 'text.secondary', mb: 1 }} />
           <Typography variant="body1" fontWeight={500}>Drop files here or click to upload</Typography>
           <Typography variant="caption" color="text.secondary">
             PNG, JPG, PDF up to 10MB
@@ -128,12 +129,12 @@ export const DropZone: Story = {
                 key={`${file.name}-${i}`}
                 secondaryAction={
                   <IconButton size="small" edge="end" onClick={() => setFiles((f) => f.filter((_, idx) => idx !== i))}>
-                    <DeleteIcon fontSize="small" />
+                    <Trash fontSize="small" />
                   </IconButton>
                 }
               >
                 <ListItemIcon sx={{ minWidth: 36 }}>
-                  {file.type.startsWith('image/') ? <ImageIcon fontSize="small" color="primary" /> : <InsertDriveFileIcon fontSize="small" />}
+                  {file.type.startsWith('image/') ? <Image fontSize="small" color="primary" /> : <File fontSize="small" />}
                 </ListItemIcon>
                 <ListItemText
                   primary={file.name}
@@ -159,19 +160,19 @@ export const WithProgress: Story = {
     ]
     return (
       <Stack spacing={2} sx={{ maxWidth: 480 }}>
-        <Button variant="outlined" startIcon={<UploadFileIcon />}>Add Files</Button>
+        <Button variant="outlined" startIcon={<UploadSimple />}>Add Files</Button>
         <List>
           {mockFiles.map((file) => (
             <ListItem key={file.name} disablePadding sx={{ mb: 1 }}>
               <Box sx={{ width: '100%' }}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center" mb={0.5}>
                   <Stack direction="row" spacing={1} alignItems="center">
-                    <InsertDriveFileIcon fontSize="small" color="action" />
+                    <File fontSize="small" color="action" />
                     <Typography variant="body2">{file.name}</Typography>
                   </Stack>
                   <Stack direction="row" spacing={1} alignItems="center">
                     <Typography variant="caption" color="text.secondary">{file.size}</Typography>
-                    {file.status === 'done' && <CheckCircleIcon fontSize="small" color="success" />}
+                    {file.status === 'done' && <CheckCircle fontSize="small" color="success" />}
                     {file.status === 'queued' && <Chip label="Queued" size="small" variant="outlined" />}
                   </Stack>
                 </Stack>
@@ -221,7 +222,7 @@ export const AvatarUpload: Story = {
             backgroundSize: 'cover', backgroundPosition: 'center',
           }}
         >
-          {!preview && <CloudUploadIcon color="action" />}
+          {!preview && <CloudArrowUp color="action" />}
         </Box>
         <Stack direction="row" spacing={1}>
           <Button size="small" variant="outlined" onClick={() => ref.current?.click()}>

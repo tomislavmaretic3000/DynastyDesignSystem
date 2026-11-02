@@ -1,12 +1,13 @@
+import { House, MagnifyingGlass, Bell, User, Bookmark, SquaresFour } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { BottomNavigation, BottomNavigationAction, Box, Paper, Typography, Stack } from '@dynasty-ds/ui'
-import HomeIcon from '@mui/icons-material/Home'
-import SearchIcon from '@mui/icons-material/Search'
-import NotificationsIcon from '@mui/icons-material/Notifications'
-import PersonIcon from '@mui/icons-material/Person'
-import BookmarkIcon from '@mui/icons-material/Bookmark'
-import DashboardIcon from '@mui/icons-material/Dashboard'
+
+
+
+
+
+
 
 const meta: Meta<typeof BottomNavigation> = {
   title: 'Components/Navigation/Bottom Navigation',
@@ -24,10 +25,10 @@ export const Default: Story = {
     return (
       <Box sx={{ maxWidth: 500, border: 1, borderColor: 'divider', borderRadius: 2, overflow: 'hidden' }}>
         <BottomNavigation value={value} onChange={(_, v) => setValue(v)} showLabels>
-          <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-          <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-          <BottomNavigationAction label="Alerts" icon={<NotificationsIcon />} />
-          <BottomNavigationAction label="Profile" icon={<PersonIcon />} />
+          <BottomNavigationAction label="Home" icon={<House />} />
+          <BottomNavigationAction label="Search" icon={<MagnifyingGlass />} />
+          <BottomNavigationAction label="Alerts" icon={<Bell />} />
+          <BottomNavigationAction label="Profile" icon={<User />} />
         </BottomNavigation>
       </Box>
     )
@@ -40,10 +41,10 @@ export const WithoutLabels: Story = {
     return (
       <Box sx={{ maxWidth: 500, border: 1, borderColor: 'divider', borderRadius: 2, overflow: 'hidden' }}>
         <BottomNavigation value={value} onChange={(_, v) => setValue(v)}>
-          <BottomNavigationAction icon={<HomeIcon />} />
-          <BottomNavigationAction icon={<SearchIcon />} />
-          <BottomNavigationAction icon={<BookmarkIcon />} />
-          <BottomNavigationAction icon={<PersonIcon />} />
+          <BottomNavigationAction icon={<House />} />
+          <BottomNavigationAction icon={<MagnifyingGlass />} />
+          <BottomNavigationAction icon={<Bookmark />} />
+          <BottomNavigationAction icon={<User />} />
         </BottomNavigation>
       </Box>
     )
@@ -55,10 +56,10 @@ export const MobileAppFrame: Story = {
   render: () => {
     const [value, setValue] = useState(0)
     const tabs = [
-      { label: 'Home', icon: <HomeIcon />, content: 'Dashboard content goes here.' },
-      { label: 'Search', icon: <SearchIcon />, content: 'Search results appear here.' },
-      { label: 'Saved', icon: <BookmarkIcon />, content: 'Your saved items.' },
-      { label: 'Me', icon: <PersonIcon />, content: 'Profile and account settings.' },
+      { label: 'Home', icon: <House />, content: 'Dashboard content goes here.' },
+      { label: 'Search', icon: <MagnifyingGlass />, content: 'Search results appear here.' },
+      { label: 'Saved', icon: <Bookmark />, content: 'Your saved items.' },
+      { label: 'Me', icon: <User />, content: 'Profile and account settings.' },
     ]
     return (
       <Box

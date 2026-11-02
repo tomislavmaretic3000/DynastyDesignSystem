@@ -165,3 +165,6 @@ export type {
   StepperProps,
   ImageListProps,
 } from '@mui/material'
+
+export { SegmentedTabs } from './SegmentedTabs'
+export type { SegmentedTabItem } from './SegmentedTabs'

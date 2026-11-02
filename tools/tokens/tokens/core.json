@@ -522,19 +522,19 @@
   "fontWeights": {
     "headingRegular": {
       "$type": "fontWeights",
-      "$value": "Regular"
+      "$value": 500
     },
     "headingBold": {
       "$type": "fontWeights",
-      "$value": "Bold"
+      "$value": 700
     },
     "bodyRegular": {
       "$type": "fontWeights",
-      "$value": "Regular"
+      "$value": 400
     },
     "bodyBold": {
       "$type": "fontWeights",
-      "$value": "Bold"
+      "$value": 700
     }
   },
   "fontSizes": {

@@ -1,3 +1,4 @@
+import { List as ListIcon, Tray, SquaresFour, Users, Gear, Bell } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
@@ -5,12 +6,12 @@ import {
   IconButton, Drawer, List, ListItem, ListItemButton,
   ListItemIcon, ListItemText, Divider, Stack, Avatar,
 } from '@dynasty-ds/ui'
-import MenuIcon from '@mui/icons-material/Menu'
-import InboxIcon from '@mui/icons-material/Inbox'
-import DashboardIcon from '@mui/icons-material/Dashboard'
-import PeopleIcon from '@mui/icons-material/People'
-import SettingsIcon from '@mui/icons-material/Settings'
-import NotificationsIcon from '@mui/icons-material/Notifications'
+
+
+
+
+
+
 
 const meta: Meta = {
   title: 'Components/Navigation',
@@ -49,7 +50,7 @@ export const TopBarWithActions: Story = {
             ))}
           </Stack>
           <IconButton size="large">
-            <NotificationsIcon />
+            <Bell />
           </IconButton>
           <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main', ml: 1 }}>A</Avatar>
         </Toolbar>
@@ -99,14 +100,14 @@ export const SideDrawer: Story = {
   render: () => {
     const [open, setOpen] = useState(false)
     const items = [
-      { label: 'Dashboard', icon: <DashboardIcon /> },
-      { label: 'Team', icon: <PeopleIcon /> },
-      { label: 'Inbox', icon: <InboxIcon /> },
-      { label: 'Settings', icon: <SettingsIcon /> },
+      { label: 'Dashboard', icon: <SquaresFour /> },
+      { label: 'Team', icon: <Users /> },
+      { label: 'Inbox', icon: <Tray /> },
+      { label: 'Settings', icon: <Gear /> },
     ]
     return (
       <>
-        <Button variant="contained" startIcon={<MenuIcon />} onClick={() => setOpen(true)}>
+        <Button variant="contained" startIcon={<ListIcon />} onClick={() => setOpen(true)}>
           Open Drawer
         </Button>
         <Drawer anchor="left" open={open} onClose={() => setOpen(false)}>

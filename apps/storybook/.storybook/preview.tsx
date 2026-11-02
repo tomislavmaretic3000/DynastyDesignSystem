@@ -1,13 +1,16 @@
 import type { Preview } from '@storybook/react'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import { theme } from '@dynasty-ds/ui'
+import { IconContext } from '@phosphor-icons/react'
 
 const preview: Preview = {
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Story />
+        <IconContext.Provider value={{ weight: 'bold', size: 20 }}>
+          <Story />
+        </IconContext.Provider>
       </ThemeProvider>
     ),
   ],

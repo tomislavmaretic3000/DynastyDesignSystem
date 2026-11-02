@@ -1,18 +1,19 @@
+import { DotsThreeVertical, CaretDown, PencilSimple, Copy, Trash, Archive, SignOut, User, Gear } from '@phosphor-icons/react'
 import { useState, type ReactNode } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Button, Menu, MenuItem, IconButton, Divider, ListItemIcon,
   ListItemText, Typography, Stack, Chip, Avatar, Box,
 } from '@dynasty-ds/ui'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import EditIcon from '@mui/icons-material/Edit'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
-import DeleteIcon from '@mui/icons-material/Delete'
-import ArchiveIcon from '@mui/icons-material/Archive'
-import LogoutIcon from '@mui/icons-material/Logout'
-import PersonIcon from '@mui/icons-material/Person'
-import SettingsIcon from '@mui/icons-material/Settings'
+
+
+
+
+
+
+
+
+
 
 const meta: Meta = {
   title: 'Components/Navigation/Dropdown',
@@ -42,7 +43,7 @@ export const Default: Story = {
   render: () => (
     <DropdownMenu
       trigger={
-        <Button variant="outlined" endIcon={<KeyboardArrowDownIcon />}>
+        <Button variant="outlined" endIcon={<CaretDown />}>
           Options
         </Button>
       }
@@ -61,27 +62,27 @@ export const WithIcons: Story = {
   render: () => (
     <DropdownMenu
       trigger={
-        <Button variant="contained" endIcon={<KeyboardArrowDownIcon />}>
+        <Button variant="contained" endIcon={<CaretDown />}>
           Actions
         </Button>
       }
       items={
         <>
           <MenuItem>
-            <ListItemIcon><EditIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><PencilSimple fontSize="small" /></ListItemIcon>
             <ListItemText>Edit</ListItemText>
           </MenuItem>
           <MenuItem>
-            <ListItemIcon><ContentCopyIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><Copy fontSize="small" /></ListItemIcon>
             <ListItemText>Duplicate</ListItemText>
           </MenuItem>
           <MenuItem>
-            <ListItemIcon><ArchiveIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><Archive fontSize="small" /></ListItemIcon>
             <ListItemText>Archive</ListItemText>
           </MenuItem>
           <Divider />
           <MenuItem sx={{ color: 'error.main' }}>
-            <ListItemIcon><DeleteIcon fontSize="small" color="error" /></ListItemIcon>
+            <ListItemIcon><Trash fontSize="small" color="error" /></ListItemIcon>
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -93,20 +94,20 @@ export const WithIcons: Story = {
 export const IconButtonMenu: Story = {
   render: () => (
     <DropdownMenu
-      trigger={<IconButton><MoreVertIcon /></IconButton>}
+      trigger={<IconButton><DotsThreeVertical /></IconButton>}
       items={
         <>
           <MenuItem>
-            <ListItemIcon><EditIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><PencilSimple fontSize="small" /></ListItemIcon>
             <ListItemText>Edit</ListItemText>
           </MenuItem>
           <MenuItem>
-            <ListItemIcon><ContentCopyIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><Copy fontSize="small" /></ListItemIcon>
             <ListItemText>Copy link</ListItemText>
           </MenuItem>
           <Divider />
           <MenuItem sx={{ color: 'error.main' }}>
-            <ListItemIcon><DeleteIcon fontSize="small" color="error" /></ListItemIcon>
+            <ListItemIcon><Trash fontSize="small" color="error" /></ListItemIcon>
             <ListItemText>Delete</ListItemText>
           </MenuItem>
         </>
@@ -122,7 +123,7 @@ export const UserMenu: Story = {
         <Stack direction="row" spacing={1} alignItems="center" sx={{ cursor: 'pointer' }}>
           <Avatar sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}>A</Avatar>
           <Typography variant="body2" fontWeight={500}>Alex Morgan</Typography>
-          <KeyboardArrowDownIcon fontSize="small" />
+          <CaretDown fontSize="small" />
         </Stack>
       }
       items={
@@ -133,16 +134,16 @@ export const UserMenu: Story = {
           </Box>
           <Divider />
           <MenuItem>
-            <ListItemIcon><PersonIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><User fontSize="small" /></ListItemIcon>
             <ListItemText>Profile</ListItemText>
           </MenuItem>
           <MenuItem>
-            <ListItemIcon><SettingsIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><Gear fontSize="small" /></ListItemIcon>
             <ListItemText>Settings</ListItemText>
           </MenuItem>
           <Divider />
           <MenuItem>
-            <ListItemIcon><LogoutIcon fontSize="small" /></ListItemIcon>
+            <ListItemIcon><SignOut fontSize="small" /></ListItemIcon>
             <ListItemText>Log out</ListItemText>
           </MenuItem>
         </>
@@ -155,7 +156,7 @@ export const WithDescriptions: Story = {
   render: () => (
     <DropdownMenu
       trigger={
-        <Button variant="outlined" endIcon={<KeyboardArrowDownIcon />}>
+        <Button variant="outlined" endIcon={<CaretDown />}>
           New item
         </Button>
       }

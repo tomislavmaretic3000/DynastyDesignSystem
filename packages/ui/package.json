@@ -15,6 +15,11 @@
       "types": "./dist/theme/index.d.ts",
       "import": "./dist/theme/index.mjs",
       "require": "./dist/theme/index.js"
+    },
+    "./icons": {
+      "types": "./dist/icons/index.d.ts",
+      "import": "./dist/icons/index.mjs",
+      "require": "./dist/icons/index.js"
     }
   },
   "scripts": {
@@ -41,6 +46,7 @@
     "typescript": "^5.4.0"
   },
   "dependencies": {
-    "@mui/lab": "5.0.0-alpha.177"
+    "@mui/lab": "5.0.0-alpha.177",
+    "@phosphor-icons/react": "^2.1.10"
   }
 }

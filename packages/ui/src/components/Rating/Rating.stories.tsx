@@ -1,8 +1,9 @@
+import { Heart } from '@phosphor-icons/react'
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Rating, Stack, Box, Typography } from '@dynasty-ds/ui'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+
+
 
 const meta: Meta<typeof Rating> = {
   title: 'Components/Inputs/Rating',
@@ -67,8 +68,8 @@ export const CustomIcon: Story = {
   render: () => (
     <Rating
       defaultValue={3}
-      icon={<FavoriteIcon color="error" />}
-      emptyIcon={<FavoriteBorderIcon />}
+      icon={<Heart color="error" />}
+      emptyIcon={<Heart />}
     />
   ),
 }

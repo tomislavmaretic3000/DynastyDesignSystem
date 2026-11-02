@@ -1,8 +1,9 @@
+import { House, CaretRight, Folder } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { Breadcrumbs, Link, Typography, Stack, Chip } from '@dynasty-ds/ui'
-import HomeIcon from '@mui/icons-material/Home'
-import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-import FolderIcon from '@mui/icons-material/Folder'
+
+
+
 
 const meta: Meta<typeof Breadcrumbs> = {
   title: 'Components/Navigation/Breadcrumbs',
@@ -28,15 +29,15 @@ export const WithIcons: Story = {
   render: () => (
     <Breadcrumbs>
       <Link underline="hover" color="inherit" href="#" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-        <HomeIcon fontSize="small" />
+        <House fontSize="small" />
         Home
       </Link>
       <Link underline="hover" color="inherit" href="#" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-        <FolderIcon fontSize="small" />
+        <Folder fontSize="small" />
         Projects
       </Link>
       <Typography color="text.primary" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-        <FolderIcon fontSize="small" />
+        <Folder fontSize="small" />
         Design System
       </Typography>
     </Breadcrumbs>
@@ -58,7 +59,7 @@ export const CustomSeparator: Story = {
         <Typography color="text.primary">Current</Typography>
       </Breadcrumbs>
 
-      <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />}>
+      <Breadcrumbs separator={<CaretRight fontSize="small" />}>
         <Link underline="hover" color="inherit" href="#">Home</Link>
         <Link underline="hover" color="inherit" href="#">Projects</Link>
         <Typography color="text.primary">Current</Typography>
@@ -87,7 +88,7 @@ export const AppBreadcrumb: Story = {
         ['Home', 'Settings'],
         ['Home', 'Team', 'Members', 'Alex Morgan'],
       ].map((path, i) => (
-        <Breadcrumbs key={i} separator={<NavigateNextIcon fontSize="small" />}>
+        <Breadcrumbs key={i} separator={<CaretRight fontSize="small" />}>
           {path.map((segment, j) =>
             j < path.length - 1 ? (
               <Link key={segment} underline="hover" color="inherit" href="#">{segment}</Link>

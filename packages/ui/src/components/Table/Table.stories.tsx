@@ -1,10 +1,11 @@
+import { PencilSimple, Trash } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   TablePagination, Paper, Chip, Avatar, Stack, Typography, IconButton,
 } from '@dynasty-ds/ui'
-import EditIcon from '@mui/icons-material/Edit'
-import DeleteIcon from '@mui/icons-material/Delete'
+
+
 import { useState } from 'react'
 
 const meta: Meta = {
@@ -96,8 +97,8 @@ export const WithAvatars: Story = {
                 <Chip label={row.status} size="small" color={statusColor(row.status) as any} />
               </TableCell>
               <TableCell align="right">
-                <IconButton size="small"><EditIcon fontSize="small" /></IconButton>
-                <IconButton size="small" color="error"><DeleteIcon fontSize="small" /></IconButton>
+                <IconButton size="small"><PencilSimple fontSize="small" /></IconButton>
+                <IconButton size="small" color="error"><Trash fontSize="small" /></IconButton>
               </TableCell>
             </TableRow>
           ))}

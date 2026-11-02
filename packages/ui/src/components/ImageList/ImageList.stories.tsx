@@ -1,7 +1,8 @@
+import { Info, Star } from '@phosphor-icons/react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { ImageList, ImageListItem, ImageListItemBar, IconButton, Box, Typography, Stack } from '@dynasty-ds/ui'
-import InfoIcon from '@mui/icons-material/Info'
-import StarBorderIcon from '@mui/icons-material/StarBorder'
+
+
 
 const meta: Meta<typeof ImageList> = {
   title: 'Components/Layout/Image List',
@@ -64,7 +65,7 @@ export const WithTitleBar: Story = {
             title={labels[i]}
             actionIcon={
               <IconButton sx={{ color: 'rgba(255,255,255,.54)' }} aria-label={labels[i]}>
-                <InfoIcon />
+                <Info />
               </IconButton>
             }
           />
