@@ -356,18 +356,18 @@ export const tokens = {
     "h2": "26"
   },
   "fontWeights": {
-    "headingRegular": 500,
+    "headingRegular": 600,
     "headingBold": 700,
     "bodyRegular": 400,
     "bodyBold": 700
   },
   "fontSizes": {
-    "h1": 49,
-    "h2": 39,
-    "h3": 31,
-    "h4": 25,
-    "h5": 20,
-    "h6": "16",
+    "h1": 55,
+    "h2": 44,
+    "h3": 35,
+    "h4": 28,
+    "h5": 22,
+    "h6": "18",
     "body": "16",
     "sm": 13.6,
     "xs": 10.4

@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles'
+import { createTheme, Fade } from '@mui/material'
 import type { ThemeOptions, Shadows } from '@mui/material/styles'
 
 declare module '@mui/material/styles' {
@@ -248,8 +248,8 @@ const themeOptions: ThemeOptions = {
           paddingLeft: '16px',
           paddingRight: '16px',
           '@media (prefers-reduced-motion: no-preference)': {
-            transition: 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease, transform 80ms ease',
-            '&:active': { transform: 'scale(0.96)' },
+            transition: 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease, transform 120ms cubic-bezier(0.23, 1, 0.32, 1)',
+            '&:active': { transform: 'scale(0.97)', transition: 'transform 100ms cubic-bezier(0.23, 1, 0.32, 1)' },
           },
         },
         sizeSmall: {
@@ -437,6 +437,16 @@ const themeOptions: ThemeOptions = {
         },
       },
     }) as any),
+    MuiDrawer: {
+      defaultProps: {
+        transitionDuration: { enter: 300, exit: 220 },
+      },
+      styleOverrides: {
+        paper: {
+          transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1) !important',
+        },
+      },
+    },
     MuiBackdrop: {
       styleOverrides: {
         root: {
@@ -581,6 +591,7 @@ const themeOptions: ThemeOptions = {
       defaultProps: {
         enterDelay: 300,
         enterNextDelay: 100,
+        TransitionComponent: Fade,
         TransitionProps: { timeout: { enter: 120, exit: 80 } },
       },
       styleOverrides: {
@@ -600,11 +611,13 @@ const themeOptions: ThemeOptions = {
     MuiMenu: {
       defaultProps: {
         transitionDuration: { enter: 80, exit: 60 },
+        TransitionComponent: Fade,
       },
     },
     MuiPopover: {
       defaultProps: {
         transitionDuration: { enter: 80, exit: 60 },
+        TransitionComponent: Fade,
       },
     },
     MuiMenuItem: {
@@ -618,6 +631,7 @@ const themeOptions: ThemeOptions = {
     MuiSelect: {
       defaultProps: {
         IconComponent: SelectIcon,
+        MenuProps: { TransitionComponent: Fade },
       },
       styleOverrides: {
         icon: { fontSize: '20px', right: 14 },
