@@ -117,6 +117,30 @@ export const Outlined: Story = {
   ),
 }
 
+export const WorstCase: Story = {
+  name: 'Worst case — long name CardHeader',
+  render: () => (
+    <Stack spacing={2} sx={{ maxWidth: 360 }}>
+      <Typography variant="caption" color="text.secondary">
+        Avatar should top-align when the name wraps — MuiCardHeader needs align-items: flex-start
+      </Typography>
+      <Card>
+        <CardHeader
+          avatar={<Avatar sx={{ bgcolor: 'primary.main', flexShrink: 0 }}>AW</Avatar>}
+          action={<IconButton><DotsThreeVertical size={20} /></IconButton>}
+          title="Aleksandra Wiśniewska-Kowalczyk"
+          subheader="Senior Product Designer, Platform & Design Systems"
+        />
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            bartholomew.fitzgerald@northwind-industries-holdings.example.com
+          </Typography>
+        </CardContent>
+      </Card>
+    </Stack>
+  ),
+}
+
 export const StatCard: Story = {
   render: () => (
     <Grid container spacing={2} sx={{ maxWidth: 800 }}>

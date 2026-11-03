@@ -139,6 +139,9 @@ const themeOptions: ThemeOptions = {
       paper: tokens.background.main.base.white,           // #ffffff
     },
     divider: tokens.border.main.default,                  // zinc-200: #e5e7eb
+    action: {
+      selectedOpacity: 0.12,
+    },
   },
 
   typography: {
@@ -227,6 +230,28 @@ const themeOptions: ThemeOptions = {
   spacing: 4, // base unit: 4px — matches tokens spacing.4 = 4, spacing.8 = 8, etc.
 
   components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        * {
+          scrollbar-width: thin;
+          scrollbar-color: ${tokens.colors.zinc[300]} transparent;
+        }
+        *::-webkit-scrollbar {
+          width: ${tokens.spacing[6]}px;
+          height: ${tokens.spacing[6]}px;
+        }
+        *::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        *::-webkit-scrollbar-thumb {
+          background-color: ${tokens.colors.zinc[300]};
+          border-radius: ${tokens.spacing[4]}px;
+        }
+        *::-webkit-scrollbar-thumb:hover {
+          background-color: ${tokens.colors.zinc[400]};
+        }
+      `,
+    },
     MuiIconButton: {
       defaultProps: { disableRipple: true },
       styleOverrides: {
@@ -242,11 +267,10 @@ const themeOptions: ThemeOptions = {
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: tokens.radius['rounded-lg'],
           textTransform: 'none',
           fontWeight: 400,
-          paddingLeft: '16px',
-          paddingRight: '16px',
+          paddingLeft: tokens.spacing[16],
+          paddingRight: tokens.spacing[16],
           '@media (prefers-reduced-motion: no-preference)': {
             transition: 'background-color 120ms ease, color 120ms ease, box-shadow 120ms ease, transform 120ms cubic-bezier(0.23, 1, 0.32, 1)',
             '&:active': { transform: 'scale(0.97)', transition: 'transform 100ms cubic-bezier(0.23, 1, 0.32, 1)' },
@@ -254,15 +278,15 @@ const themeOptions: ThemeOptions = {
         },
         sizeSmall: {
           height: controlHeightSm,
-          paddingLeft: '14px',
-          paddingRight: '14px',
+          paddingLeft: tokens.spacing[14],
+          paddingRight: tokens.spacing[14],
           fontSize: tokens.fontSizes.sm,
         },
         sizeMedium: {
-          height: 48,
+          height: tokens.spacing[48],
         },
         sizeLarge: {
-          height: 56,
+          height: tokens.spacing[56],
         },
         outlined: {
           borderColor: tokens.colors.zinc[300],
@@ -291,7 +315,7 @@ const themeOptions: ThemeOptions = {
           fontSize: tokens.fontSizes.sm,
           fontWeight: 500,
           color: tokens.fg.muted,
-          marginBottom: '6px',
+          marginBottom: tokens.spacing[6],
           '&.MuiInputLabel-shrink': { transform: 'none', maxWidth: '100%' },
           '&.Mui-error': { color: tokens.functional.main.error },
           '&.Mui-disabled': { color: tokens.fg.subtle },
@@ -299,6 +323,9 @@ const themeOptions: ThemeOptions = {
       },
     },
     MuiOutlinedInput: {
+      defaultProps: {
+        placeholder: ' ',
+      },
       styleOverrides: {
         input: {
           fontSize: tokens.fontSizes.sm,
@@ -307,6 +334,9 @@ const themeOptions: ThemeOptions = {
             color: tokens.fg.subtle,
             opacity: 1,
           },
+          '&.MuiInputBase-inputMultiline': {
+            '&::-webkit-scrollbar-track': { margin: `${tokens.spacing[4]}px 0` },
+          },
         },
         sizeSmall: {
           '&:not(.MuiInputBase-multiline)': {
@@ -314,19 +344,14 @@ const themeOptions: ThemeOptions = {
           },
         },
         root: {
-          backgroundColor: tokens.background.main.base.subtle,
-          transition: 'background-color 120ms ease',
+          backgroundColor: tokens.background.main.base.white,
           '&:hover': {
-            backgroundColor: tokens.colors.zinc[100],
             '& .MuiOutlinedInput-notchedOutline': {
               borderColor: tokens.colors.zinc[400],
             },
           },
-          '&.Mui-focused': {
-            backgroundColor: tokens.background.main.base.white,
-          },
-          '&:has(input:not(:placeholder-shown)), &:has(textarea:not(:placeholder-shown))': {
-            backgroundColor: tokens.background.main.base.white,
+          '&.Mui-disabled': {
+            backgroundColor: tokens.background.main.base.subtle,
           },
           '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             borderColor: tokens.colors.midnight[400],
@@ -337,6 +362,13 @@ const themeOptions: ThemeOptions = {
           },
           '&.Mui-disabled .MuiOutlinedInput-notchedOutline': {
             borderColor: tokens.border.main.default,
+          },
+          '&.MuiInputBase-multiline': {
+            paddingRight: tokens.spacing[4],
+          },
+          // Higher specificity than MUI's .MuiSelect-select.MuiInputBase-input.MuiOutlinedInput-input — no !important needed
+          '& .MuiSelect-select.MuiInputBase-input.MuiOutlinedInput-input': {
+            paddingRight: tokens.spacing[40],
           },
         },
         notchedOutline: {
@@ -358,6 +390,8 @@ const themeOptions: ThemeOptions = {
       styleOverrides: {
         root: ({ ownerState }: { ownerState: { color?: string; variant?: string } }) => ({
           borderRadius: tokens.radius['rounded-md'],
+          maxWidth: '100%',
+          overflow: 'hidden',
           ...(ownerState.variant !== 'outlined' && ownerState.color === 'success' && {
             backgroundColor: tokens.functional.main.success,
             color: tokens.colors.base.white,
@@ -380,15 +414,15 @@ const themeOptions: ThemeOptions = {
           }),
         }),
         label: {
-          paddingLeft: 10,
-          paddingRight: 10,
+          paddingLeft: tokens.spacing[10],
+          paddingRight: tokens.spacing[10],
           fontSize: tokens.fontSizes.sm,
           fontWeight: 400,
           lineHeight: 1,
         },
         labelSmall: {
-          paddingLeft: 8,
-          paddingRight: 8,
+          paddingLeft: tokens.spacing[8],
+          paddingRight: tokens.spacing[8],
           fontSize: tokens.fontSizes.xs,
           fontWeight: 400,
           lineHeight: 1,
@@ -401,11 +435,13 @@ const themeOptions: ThemeOptions = {
         defaultProps: {
           rowHeight: dataGridRowHeight,
           columnHeaderHeight: dataGridRowHeight,
+          getRowHeight: () => 'auto',
         },
         styleOverrides: {
           root: {
             '& .MuiDataGrid-columnHeaders': {
               backgroundColor: tokens.colors.zinc[50],
+              borderBottom: `1px solid ${tokens.colors.zinc[300]}`,
             },
             '& .MuiDataGrid-columnHeader': {
               backgroundColor: tokens.colors.zinc[50],
@@ -418,19 +454,20 @@ const themeOptions: ThemeOptions = {
             '& .MuiDataGrid-cell': {
               fontSize: tokens.fontSizes.sm,
               alignItems: 'flex-start',
-              paddingTop: '10px',
-              paddingBottom: '10px',
+              paddingTop: tokens.spacing[10],
+              paddingBottom: tokens.spacing[10],
               whiteSpace: 'normal',
               wordBreak: 'break-word',
               lineHeight: 1.5,
+              borderBottom: `1px solid ${tokens.border.main.default}`,
             },
             '& .MuiDataGrid-row:hover': {
               backgroundColor: tokens.colors.zinc[50],
             },
-            '& .MuiDataGrid-row.Mui-selected': {
+            '&.MuiDataGrid-root .MuiDataGrid-row.Mui-selected': {
               backgroundColor: tokens.colors.zinc[100],
             },
-            '& .MuiDataGrid-row.Mui-selected:hover': {
+            '&.MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover': {
               backgroundColor: tokens.colors.zinc[200],
             },
           },
@@ -455,6 +492,25 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: tokens.radius['rounded-2xl'],
+        },
+      },
+    },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          '& .MuiButton-text': {
+            border: `1px solid ${tokens.border.main.default}`,
+            '&:hover': {
+              borderColor: tokens.colors.zinc[300],
+            },
+          },
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -464,45 +520,45 @@ const themeOptions: ThemeOptions = {
     },
     MuiSwitch: {
       styleOverrides: {
-        root: {
-          width: 52,
-          height: 32,
+        root: ({ ownerState }: { ownerState: { size?: string } }) => ({
+          width: tokens.spacing[52],
+          height: tokens.spacing[32],
           padding: 0,
           overflow: 'hidden',
           flexShrink: 0,
-          '&.MuiSwitch-sizeSmall': {
-            width: 36,
-            height: 22,
-          },
-        },
-        switchBase: {
-          padding: 3,
+          ...(ownerState.size === 'small' && {
+            width: tokens.spacing[36],
+            height: tokens.spacing[20] + 2, // 22px: thumb(18) + padding(2)*2
+          }),
+        }),
+        switchBase: ({ ownerState }: { ownerState: { size?: string } }) => ({
+          padding: tokens.spacing[2] + 1,
           margin: 0,
           '&.Mui-checked': {
-            color: '#fff',
-            transform: 'translateX(20px)',
+            color: tokens.colors.base.white,
+            transform: `translateX(${tokens.spacing[20]}px)`,
             margin: 0,
           },
-          '.MuiSwitch-sizeSmall &': {
-            padding: 2,
+          ...(ownerState.size === 'small' && {
+            padding: tokens.spacing[2],
             '&.Mui-checked': {
-              transform: 'translateX(14px)',
+              transform: `translateX(${tokens.spacing[14]}px)`,
             },
-          },
-        },
-        thumb: {
+          }),
+        }),
+        thumb: ({ ownerState }: { ownerState: { size?: string } }) => ({
           width: 26,
           height: 26,
-          backgroundColor: '#fff',
+          backgroundColor: tokens.colors.base.white,
           boxShadow: `0 2px 4px rgba(${sRgb}, 0.15)`,
-          '.MuiSwitch-sizeSmall &': {
-            width: 18,
-            height: 18,
+          ...(ownerState.size === 'small' && {
+            width: tokens.spacing[18],
+            height: tokens.spacing[18],
             boxShadow: `0 1px 3px rgba(${sRgb}, 0.15)`,
-          },
-        },
+          }),
+        }),
         track: {
-          borderRadius: 16,
+          borderRadius: tokens.spacing[16],
           opacity: 0.35,
           backgroundColor: tokens.colors.midnight[500],
           '.Mui-checked + &': {
@@ -551,12 +607,12 @@ const themeOptions: ThemeOptions = {
         expandIcon: <CaretDown size={20} weight="bold" />,
       },
       styleOverrides: {
-        root: { padding: '0 16px' },
+        root: { padding: `0 ${tokens.spacing[16]}px` },
       },
     },
     MuiAccordionDetails: {
       styleOverrides: {
-        root: { padding: '0 16px 16px' },
+        root: { padding: `0 ${tokens.spacing[16]}px ${tokens.spacing[16]}px` },
       },
     },
     MuiTableCell: {
@@ -567,8 +623,24 @@ const themeOptions: ThemeOptions = {
           borderRight: 'none',
         },
         head: {
+          backgroundColor: tokens.colors.zinc[50],
           fontWeight: 600,
-          borderBottom: `2px solid ${tokens.border.main.dark}`,
+          borderBottom: `1px solid ${tokens.colors.zinc[300]}`,
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: tokens.colors.zinc[50],
+          },
+          '&.Mui-selected': {
+            backgroundColor: tokens.colors.midnight[100],
+            '&:hover': {
+              backgroundColor: tokens.colors.midnight[150],
+            },
+          },
         },
       },
     },
@@ -598,9 +670,9 @@ const themeOptions: ThemeOptions = {
         tooltip: {
           fontSize: tokens.fontSizes.sm,
           backgroundColor: tokens.colors.zinc[900],
-          color: tokens.colors.white,
-          borderRadius: 6,
-          padding: '5px 10px',
+          color: tokens.colors.base.white,
+          borderRadius: tokens.radius['rounded-md'],
+          padding: `${tokens.spacing[4] + 1}px ${tokens.spacing[10]}px`,
           animation: 'ds-tooltip-in 120ms cubic-bezier(0.22, 1, 0.36, 1) both',
         },
         arrow: {
@@ -634,13 +706,7 @@ const themeOptions: ThemeOptions = {
         MenuProps: { TransitionComponent: Fade },
       },
       styleOverrides: {
-        icon: { fontSize: '20px', right: 14 },
-        select: {
-          paddingRight: '40px !important',
-          '&:has(+ input[value=""])': {
-            color: tokens.fg.subtle,
-          },
-        },
+        icon: { right: tokens.spacing[14] },
       },
     },
     MuiNativeSelect: {
@@ -656,23 +722,16 @@ const themeOptions: ThemeOptions = {
         indeterminateIcon: <MinusSquare size={22} weight="fill" />,
       },
       styleOverrides: {
-        root: {
+        root: ({ ownerState }: { ownerState: { checked?: boolean; indeterminate?: boolean } }) => ({
           padding: 0,
-          color: tokens.colors.zinc[400],
-          '&.Mui-checked, &.MuiCheckbox-indeterminate': {
-            color: tokens.colors.midnight[500],
-          },
-          '&.MuiCheckbox-colorPrimary.Mui-checked, &.MuiCheckbox-colorPrimary.MuiCheckbox-indeterminate': {
-            color: tokens.colors.midnight[500],
-          },
+          color: (ownerState.checked || ownerState.indeterminate)
+            ? tokens.colors.midnight[500]
+            : tokens.colors.zinc[400],
           '&:hover': {
             backgroundColor: 'transparent',
             color: tokens.colors.midnight[500],
           },
-          '&.MuiCheckbox-colorPrimary:not(.Mui-checked):not(.MuiCheckbox-indeterminate)': {
-            color: tokens.colors.zinc[400],
-          },
-        },
+        }),
       },
     },
     MuiSkeleton: {
@@ -701,6 +760,14 @@ const themeOptions: ThemeOptions = {
         clearIcon: <X size={16} weight="bold" />,
       },
       styleOverrides: {
+        endAdornment: {
+          right: tokens.spacing[14],
+        },
+        popupIndicator: {
+          padding: 0,
+          color: tokens.fg.muted,
+          '&:hover': { backgroundColor: 'transparent' },
+        },
         option: {
           fontSize: tokens.fontSizes.sm,
           color: tokens.fg.muted,
@@ -732,6 +799,33 @@ const themeOptions: ThemeOptions = {
             color: tokens.functional.main['info-dark'],
           },
         },
+      },
+    },
+    MuiPagination: {
+      defaultProps: {
+        shape: 'rounded',
+        color: 'standard',
+        hidePrevButton: true,
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: ({ ownerState }: { ownerState: { selected?: boolean } }) => ({
+          fontSize: tokens.fontSizes.sm,
+          fontWeight: 400,
+          color: tokens.fg.muted,
+          '&:hover': {
+            backgroundColor: tokens.colors.zinc[50],
+          },
+          ...(ownerState.selected && {
+            backgroundColor: tokens.colors.zinc[100],
+            color: tokens.colors.zinc[900],
+            fontWeight: 500,
+            '&:hover': {
+              backgroundColor: tokens.colors.zinc[100],
+            },
+          }),
+        }),
       },
     },
   },

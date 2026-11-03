@@ -10,12 +10,76 @@ const meta: Meta<typeof Checkbox> = {
   component: Checkbox,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    checked: {
+      control: 'boolean',
+      description: 'If true, the component is checked (controlled)',
+      table: { defaultValue: { summary: 'undefined' } },
+    },
+    defaultChecked: {
+      control: 'boolean',
+      description: 'The default checked state (uncontrolled)',
+      table: { defaultValue: { summary: false } },
+    },
+    indeterminate: {
+      control: 'boolean',
+      description: 'If true, the component appears indeterminate — used for select-all patterns',
+      table: { defaultValue: { summary: false } },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'If true, the component is disabled',
+      table: { defaultValue: { summary: false } },
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium'],
+      description: 'The size of the checkbox',
+      table: { defaultValue: { summary: 'medium' } },
+    },
+    color: {
+      control: 'select',
+      options: ['primary', 'secondary', 'error', 'warning', 'info', 'success', 'default'],
+      description: 'The color of the checkbox when checked — all map to midnight-500 via theme override',
+      table: { defaultValue: { summary: 'primary' } },
+    },
+    required: {
+      control: 'boolean',
+      description: 'If true, the input element is required',
+      table: { defaultValue: { summary: false } },
+    },
+    disableRipple: {
+      control: 'boolean',
+      description: 'Disable the ripple effect — enabled by default in this DS',
+      table: { defaultValue: { summary: true } },
+    },
+    onChange: {
+      action: 'changed',
+      description: 'Callback fired when the state changes — (event: React.ChangeEvent<HTMLInputElement>) => void',
+    },
+  },
+  args: {
+    defaultChecked: false,
+    indeterminate: false,
+    disabled: false,
+    size: 'medium',
+    color: 'primary',
+  },
 }
 
 export default meta
 type Story = StoryObj<typeof Checkbox>
 
 export const Default: Story = {
+  args: {
+    defaultChecked: false,
+  },
+  render: (args) => (
+    <FormControlLabel control={<Checkbox {...args} />} label="Checkbox label" />
+  ),
+}
+
+export const States: Story = {
   render: () => (
     <Stack spacing={1}>
       <FormControlLabel control={<Checkbox />} label="Unchecked" />
@@ -67,6 +131,30 @@ export const FormGroupExample: Story = {
       </FormControl>
     )
   },
+}
+
+export const WorstCase: Story = {
+  name: 'Worst case — color matches Switch',
+  render: () => (
+    <Stack spacing={2} sx={{ maxWidth: 400 }}>
+      <Typography variant="caption" color="text.secondary">
+        Checked Checkbox and checked Switch must use the same active color (midnight-500)
+      </Typography>
+      <Stack direction="row" spacing={3} alignItems="center">
+        <FormControlLabel control={<Checkbox defaultChecked />} label="Checkbox checked" />
+        <FormControlLabel control={<Switch defaultChecked />} label="Switch on" />
+        <FormControlLabel control={<Switch size="small" defaultChecked />} label="Switch small" />
+      </Stack>
+      <Stack direction="row" spacing={1}>
+        <FormControlLabel control={<Checkbox indeterminate />} label="Indeterminate" />
+        <FormControlLabel control={<Checkbox defaultChecked size="small" />} label="Small" />
+      </Stack>
+      <FormControlLabel
+        control={<Checkbox defaultChecked />}
+        label="Enable automatic background sync for all connected workspaces and sub-accounts — long label wraps without squishing the checkbox"
+      />
+    </Stack>
+  ),
 }
 
 export const IndeterminateParent: Story = {

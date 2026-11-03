@@ -10,12 +10,65 @@ const meta: Meta<typeof Switch> = {
   component: Switch,
   tags: ['autodocs'],
   parameters: { layout: 'padded' },
+  argTypes: {
+    checked: {
+      control: 'boolean',
+      description: 'If true, the component is on (controlled)',
+      table: { defaultValue: { summary: 'undefined' } },
+    },
+    defaultChecked: {
+      control: 'boolean',
+      description: 'The default on/off state (uncontrolled)',
+      table: { defaultValue: { summary: false } },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'If true, the switch is disabled',
+      table: { defaultValue: { summary: false } },
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium'],
+      description: 'Small: 36×22px · Medium: 52×32px',
+      table: { defaultValue: { summary: 'medium' } },
+    },
+    color: {
+      control: 'select',
+      options: ['primary', 'secondary', 'error', 'warning', 'info', 'success', 'default'],
+      description: 'Track color when checked — theme uses midnight-500 for primary',
+      table: { defaultValue: { summary: 'primary' } },
+    },
+    required: {
+      control: 'boolean',
+      description: 'If true, the input element is required',
+      table: { defaultValue: { summary: false } },
+    },
+    onChange: {
+      action: 'changed',
+      description: 'Callback fired when the state changes — (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void',
+    },
+  },
+  args: {
+    defaultChecked: false,
+    disabled: false,
+    size: 'medium',
+    color: 'primary',
+  },
 }
 
 export default meta
 type Story = StoryObj<typeof Switch>
 
 export const Default: Story = {
+  args: {
+    defaultChecked: false,
+  },
+  render: (args) => (
+    <FormControlLabel control={<Switch {...args} />} label="Switch label" />
+  ),
+}
+
+export const States: Story = {
   render: () => (
     <Stack spacing={1}>
       <FormControlLabel control={<Switch />} label="Off" />
@@ -45,6 +98,29 @@ export const Sizes: Story = {
     <Stack direction="row" spacing={3} alignItems="center">
       <FormControlLabel control={<Switch size="small" defaultChecked />} label="Small" />
       <FormControlLabel control={<Switch defaultChecked />} label="Medium" />
+    </Stack>
+  ),
+}
+
+export const WorstCase: Story = {
+  name: 'Worst case — sizes + long labels',
+  render: () => (
+    <Stack spacing={1} sx={{ maxWidth: 400 }}>
+      <Typography variant="caption" color="text.secondary">
+        Small checked must translate correctly; long label must wrap without squishing the control
+      </Typography>
+      <FormControlLabel
+        control={<Switch size="small" defaultChecked />}
+        label="Small — checked"
+      />
+      <FormControlLabel
+        control={<Switch defaultChecked />}
+        label="Medium — checked"
+      />
+      <FormControlLabel
+        control={<Switch size="small" defaultChecked />}
+        label="Enable automatic background sync for all connected workspaces and sub-accounts"
+      />
     </Stack>
   ),
 }

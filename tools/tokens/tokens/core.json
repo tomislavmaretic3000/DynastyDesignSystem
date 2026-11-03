@@ -568,11 +568,11 @@
     },
     "sm": {
       "$type": "fontSizes",
-      "$value": "{fontSizes.body} * 0.85"
+      "$value": "roundTo({fontSizes.body} * 0.875)"
     },
     "xs": {
       "$type": "fontSizes",
-      "$value": "{fontSizes.body} * 0.65"
+      "$value": "roundTo({fontSizes.body} * 0.75)"
     }
   }
 }

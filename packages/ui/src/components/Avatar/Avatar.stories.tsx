@@ -107,6 +107,37 @@ export const Group: Story = {
   ),
 }
 
+export const WorstCase: Story = {
+  name: 'Worst case — initials',
+  render: () => (
+    <Stack spacing={2}>
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Avatar sx={{ bgcolor: 'primary.main' }}>
+          {Array.from('Aleksandra Wiśniewska-Kowalczyk').filter(c => /\p{L}/u.test(c))[0] ?? '?'}
+        </Avatar>
+        <Typography variant="body2">Long Polish name — first alpha grapheme</Typography>
+      </Stack>
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Avatar sx={{ bgcolor: 'warning.main' }}>
+          {Array.from('Jo').filter(c => /\p{L}/u.test(c))[0] ?? '?'}
+        </Avatar>
+        <Typography variant="body2">Single-word name "Jo" — one initial, correct</Typography>
+      </Stack>
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Avatar sx={{ bgcolor: 'error.main' }}>
+          {/* Emoji-first name — naive [0] gives 🦊, correct approach skips non-alpha */}
+          {Array.from('🦊 Alice').find(c => /\p{L}/u.test(c)) ?? '?'}
+        </Avatar>
+        <Typography variant="body2">Emoji-first name "🦊 Alice" — skip emoji, take first letter</Typography>
+      </Stack>
+      <Stack direction="row" spacing={2} alignItems="center">
+        <Avatar sx={{ bgcolor: 'success.main' }}>?</Avatar>
+        <Typography variant="body2">Empty name — fallback to "?"</Typography>
+      </Stack>
+    </Stack>
+  ),
+}
+
 export const UserProfile: Story = {
   render: () => (
     <Stack direction="row" spacing={2} alignItems="center">

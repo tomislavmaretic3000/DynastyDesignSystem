@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { TextField, Stack, Box } from '@dynasty-ds/ui'
+import { TextField, Stack, Box, Typography } from '@dynasty-ds/ui'
 
 const meta: Meta<typeof TextField> = {
   title: 'Components/Inputs/TextField',
@@ -100,6 +100,26 @@ export const FullWidth: Story = {
   render: () => (
     <Box>
       <TextField label="Full width field" variant="outlined" fullWidth />
+    </Box>
+  ),
+}
+
+export const Backgrounds: Story = {
+  name: 'Backgrounds — white / grey disabled',
+  render: () => (
+    <Box sx={{ bgcolor: 'background.default', p: 3, borderRadius: 2 }}>
+      <Typography variant="caption" color="text.secondary" display="block" sx={{ mb: 2 }}>
+        Normal and hover: white. Disabled: grey (#f3f4f6). Surface: background.default.
+      </Typography>
+      <Stack spacing={2} width={320}>
+        <TextField label="Normal" variant="outlined" size="small" />
+        <TextField label="With value" variant="outlined" size="small" defaultValue="Jane Doe" />
+        <TextField label="Disabled" variant="outlined" size="small" disabled defaultValue="Cannot edit" />
+        <TextField label="Disabled empty" variant="outlined" size="small" disabled />
+        <TextField label="Error" variant="outlined" size="small" error helperText="Required" />
+        <TextField label="Multiline" variant="outlined" multiline rows={3} />
+        <TextField label="Multiline disabled" variant="outlined" multiline rows={3} disabled defaultValue="Read-only content" />
+      </Stack>
     </Box>
   ),
 }

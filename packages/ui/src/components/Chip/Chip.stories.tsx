@@ -102,6 +102,19 @@ export const Clickable: Story = {
   ),
 }
 
+export const WorstCase: Story = {
+  name: 'Worst case — long label overflow',
+  render: () => (
+    <Stack spacing={2} sx={{ maxWidth: 320 }}>
+      <Typography variant="caption" color="text.secondary">Container: 320px</Typography>
+      <Chip label="bartholomew.fitzgerald@northwind-industries-holdings.example.com" />
+      <Chip label="bartholomew.fitzgerald@northwind-industries-holdings.example.com" onDelete={() => {}} />
+      <Chip label="bartholomew.fitzgerald@northwind-industries-holdings.example.com" size="small" color="error" onDelete={() => {}} />
+      <Chip label="Aleksandra Wiśniewska-Kowalczyk — Senior Product Designer, Platform" variant="outlined" />
+    </Stack>
+  ),
+}
+
 export const StatusBadges: Story = {
   render: () => (
     <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>

@@ -38,6 +38,51 @@ function DialogWrapper({ title, content, maxWidth = 'sm', children }: {
   )
 }
 
+export const Preview: Story = {
+  name: 'Preview — static open',
+  parameters: { layout: 'centered' },
+  render: () => (
+    <Stack spacing={3} sx={{ width: 480 }}>
+      <Typography variant="caption" color="text.secondary">
+        Corner radius: rounded-2xl (16px) · Cancel: text variant → outlined border via theme
+      </Typography>
+
+      <Dialog open hideBackdrop disablePortal disableScrollLock
+        PaperProps={{ elevation: 4 }}
+        sx={{ position: 'relative' }}
+      >
+        <DialogTitle>Delete Item</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this item? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="text">Cancel</Button>
+          <Button variant="contained" color="error">Delete</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open hideBackdrop disablePortal disableScrollLock
+        PaperProps={{ elevation: 4 }}
+        sx={{ position: 'relative' }}
+      >
+        <DialogTitle>Add Team Member</DialogTitle>
+        <DialogContent>
+          <Stack spacing={2} sx={{ pt: 1 }}>
+            <TextField label="Full Name" variant="outlined" fullWidth size="small" />
+            <TextField label="Email Address" type="email" variant="outlined" fullWidth size="small" />
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="text">Cancel</Button>
+          <Button variant="contained">Add Member</Button>
+        </DialogActions>
+      </Dialog>
+    </Stack>
+  ),
+}
+
 export const Confirmation: Story = {
   render: () => (
     <DialogWrapper
