@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, useTheme } from '@mui/material'
 import { SxProps, Theme } from '@mui/material/styles'
 import { tokens } from '../../tokens'
 import { controlHeightSm } from '../../theme'
@@ -16,6 +16,8 @@ type SegmentedTabsProps<T extends string> = {
   tabs: SegmentedTabItem<T>[]
   value: T
   onChange: (value: T) => void
+  /** Stretches the control to fill its container, distributing tabs evenly. */
+  fullWidth?: boolean
   sx?: SxProps<Theme>
 }
 
@@ -24,11 +26,18 @@ export function SegmentedTabs<T extends string>({
   tabs,
   value,
   onChange,
+  fullWidth = false,
   sx,
 }: SegmentedTabsProps<T>) {
   const containerRef = useRef<HTMLDivElement>(null)
   const pillRef = useRef<HTMLSpanElement>(null)
   const mountedRef = useRef(false)
+  const theme = useTheme()
+
+  const pillTransition = theme.transitions.create(['transform', 'width'], {
+    duration: theme.transitions.duration.shortest,
+    easing: theme.transitions.easing.easeInOut,
+  })
 
   useEffect(() => {
     const container = containerRef.current
@@ -46,12 +55,12 @@ export function SegmentedTabs<T extends string>({
       pill.style.transform = `translateX(${left}px)`
       pill.style.width = `${width}px`
       void pill.offsetWidth
-      pill.style.transition = ''
+      pill.style.transition = pillTransition
     } else {
       pill.style.transform = `translateX(${left}px)`
       pill.style.width = `${width}px`
     }
-  }, [value])
+  }, [value, pillTransition])
 
   return (
     <Box
@@ -59,7 +68,7 @@ export function SegmentedTabs<T extends string>({
       sx={{
         position: 'relative',
         display: 'flex',
-        width: 'max-content',
+        width: fullWidth ? '100%' : 'max-content',
         height: controlHeightSm,
         border: '1px solid',
         borderColor: 'divider',
@@ -68,7 +77,21 @@ export function SegmentedTabs<T extends string>({
         ...sx,
       }}
     >
-      <span ref={pillRef} className="seg-tabs-pill" style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.06))' }} />
+      <Box
+        ref={pillRef}
+        component="span"
+        className="seg-tabs-pill"
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          borderRadius: 1,
+          bgcolor: 'background.paper',
+          zIndex: 0,
+          filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.06))',
+        }}
+      />
       {tabs.map(({ value: v, label, count }) => (
         <Box
           key={v}
@@ -76,7 +99,7 @@ export function SegmentedTabs<T extends string>({
           data-tab={v}
           onClick={() => onChange(v)}
           sx={{
-            flex: 'none',
+            flex: fullWidth ? '1 1 0' : 'none',
             whiteSpace: 'nowrap',
             position: 'relative',
             zIndex: 1,
@@ -88,7 +111,10 @@ export function SegmentedTabs<T extends string>({
             fontSize: tokens.fontSizes.sm,
             fontWeight: 400,
             color: value === v ? 'text.primary' : 'text.secondary',
-            transition: 'color var(--tabs-dur) var(--tabs-ease)',
+            transition: (t) => t.transitions.create('color', {
+              duration: t.transitions.duration.shortest,
+              easing: t.transitions.easing.easeInOut,
+            }),
             '&:hover': { color: 'text.primary' },
             display: 'flex',
             alignItems: 'center',
