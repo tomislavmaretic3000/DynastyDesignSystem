@@ -1,19 +1,24 @@
 import { createTheme, Fade } from '@mui/material'
 import type { ThemeOptions, Shadows } from '@mui/material/styles'
+import type { CSSProperties } from 'react'
 
 declare module '@mui/material/styles' {
   interface Palette { neutral: Palette['primary'] }
   interface PaletteOptions { neutral?: PaletteOptions['primary'] }
+  interface TypographyVariants { keyFig: CSSProperties }
+  interface TypographyVariantsOptions { keyFig?: CSSProperties }
 }
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides { neutral: true }
 }
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides { keyFig: true }
+}
 import '@mui/x-date-pickers/themeAugmentation'
 import {
   CaretDown, Triangle,
-  Square,
-  CheckSquare,
-  MinusSquare,
+  Check,
+  Minus,
   CheckCircle,
   Warning,
   XCircle,
@@ -225,6 +230,13 @@ const themeOptions: ThemeOptions = {
       fontSize: tokens.fontSizes.xs,
       lineHeight: 1.4,
     },
+    // Large standalone figures (dashboard stat cards, KPI totals) — tabular-nums
+    // keeps digits a fixed width so a column of figures doesn't jitter.
+    keyFig: {
+      fontFamily: `"Geist", sans-serif`,
+      fontSize: Number(tokens.fontSizes.keyFig),
+      fontVariantNumeric: 'tabular-nums',
+    },
     overline: {
       fontFamily: `"Geist", sans-serif`,
       fontWeight: 600,
@@ -413,6 +425,17 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          // MUI bumps padding-bottom to 24px on a CardContent that's the
+          // last child of its Card — keep all four sides equal instead
+          '&:last-child': {
+            paddingBottom: tokens.spacing[16],
+          },
+        },
+      },
+    },
     MuiChip: {
       styleOverrides: {
         root: ({ ownerState }: { ownerState: { color?: string; variant?: string } }) => ({
@@ -467,17 +490,20 @@ const themeOptions: ThemeOptions = {
         styleOverrides: {
           root: {
             '& .MuiDataGrid-columnHeaders': {
-              backgroundColor: tokens.colors.zinc[50],
+              backgroundColor: 'transparent',
+              borderTop: `1px solid ${tokens.border.main.default}`,
               borderBottom: `1px solid ${tokens.colors.zinc[400]}`,
             },
             '& .MuiDataGrid-columnHeader': {
-              backgroundColor: tokens.colors.zinc[50],
               paddingTop: tokens.spacing[8],
               paddingBottom: tokens.spacing[8],
+              paddingLeft: 0,
+              paddingRight: 0,
+              borderRadius: 0,
             },
             '& .MuiDataGrid-columnHeaderTitle': {
               fontSize: tokens.fontSizes.sm,
-              fontWeight: 600,
+              fontWeight: 400,
               color: tokens.fg.muted,
             },
             // Sort icon + menu icon — same zinc grey, same size
@@ -521,6 +547,8 @@ const themeOptions: ThemeOptions = {
               alignItems: 'flex-start',
               paddingTop: tokens.spacing[8],
               paddingBottom: tokens.spacing[8],
+              paddingLeft: 0,
+              paddingRight: 0,
               whiteSpace: 'normal',
               wordBreak: 'break-word',
               lineHeight: 1.5,
@@ -539,6 +567,9 @@ const themeOptions: ThemeOptions = {
             '& .DynastyDataGrid-totalRow': {
               backgroundColor: tokens.colors.zinc[100],
               fontWeight: 600,
+              '& .MuiDataGrid-cell': {
+                borderTop: `1px solid ${tokens.colors.zinc[400]}`,
+              },
             },
             // Icons/checkboxes align to the top of the cell, not centered —
             // matters once cell content wraps to multiple lines
@@ -729,6 +760,8 @@ const themeOptions: ThemeOptions = {
           fontSize: tokens.fontSizes.sm,
           paddingTop: tokens.spacing[8],
           paddingBottom: tokens.spacing[8],
+          paddingLeft: 0,
+          paddingRight: 0,
           verticalAlign: 'top',
           lineHeight: 1.5,
           borderBottom: `1px solid ${tokens.border.main.default}`,
@@ -736,10 +769,10 @@ const themeOptions: ThemeOptions = {
           borderRight: 'none',
         },
         head: {
-          backgroundColor: tokens.colors.zinc[50],
-          fontWeight: 600,
+          fontWeight: 400,
           color: tokens.fg.muted,
           verticalAlign: 'middle',
+          borderTop: `1px solid ${tokens.border.main.default}`,
           borderBottom: `1px solid ${tokens.colors.zinc[400]}`,
           '&:focus': { outline: 'none' },
         },
@@ -874,21 +907,57 @@ const themeOptions: ThemeOptions = {
     MuiCheckbox: {
       defaultProps: {
         disableRipple: true,
-        icon: <Square size={22} weight="light" />,
-        checkedIcon: <CheckSquare size={22} weight="fill" />,
-        indeterminateIcon: <MinusSquare size={22} weight="fill" />,
+        // Phosphor's square glyphs are a single flat color, so a filled box
+        // with a contrasting icon (checked/indeterminate) needs composing by
+        // hand — icon/checkedIcon/indeterminateIcon each render a fixed,
+        // non-reactive element, so the three states are three separate spans
+        // sharing one size/radius rather than one component branching on props.
+        icon: (
+          <span
+            style={{
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+              borderRadius: tokens.radius.rounded,
+              border: `1.5px solid ${mutedIconColor}`,
+              boxSizing: 'border-box',
+            }}
+          />
+        ),
+        checkedIcon: (
+          <span
+            style={{
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+              borderRadius: tokens.radius.rounded,
+              backgroundColor: selectedColor,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Check size={12} weight="bold" color={tokens.colors.base.white} />
+          </span>
+        ),
+        indeterminateIcon: (
+          <span
+            style={{
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+              borderRadius: tokens.radius.rounded,
+              backgroundColor: selectedColor,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Minus size={12} weight="bold" color={tokens.colors.base.white} />
+          </span>
+        ),
       },
       styleOverrides: {
-        root: ({ ownerState }: { ownerState: { checked?: boolean; indeterminate?: boolean } }) => ({
+        root: {
           padding: 0,
-          color: (ownerState.checked || ownerState.indeterminate)
-            ? selectedColor
-            : mutedIconColor,
-          '&:hover': {
-            backgroundColor: 'transparent',
-            color: selectedColor,
-          },
-        }),
+        },
       },
     },
     MuiSkeleton: {
