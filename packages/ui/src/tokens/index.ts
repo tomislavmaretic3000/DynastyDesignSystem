@@ -374,7 +374,8 @@ export const tokens = {
     "h6": "16",
     "body": "16",
     "sm": 14,
-    "xs": 12
+    "xs": 12,
+    "keyFig": "28"
   },
   "fg": {
     "default": "#000000",
@@ -642,18 +643,18 @@ export const tokens = {
   },
   "functional": {
     "main": {
-      "error-light": "#ffecee",
-      "warning-light": "#fff6f0",
-      "success-light": "#ebfbf6",
-      "info-light": "#e9f2fe",
+      "error-light": "#ffe9ea",
+      "warning-light": "#fff3d2",
+      "success-light": "#d7f7ed",
+      "info-light": "#ddebfe",
       "error": "#ff4454",
       "warning": "#ffa268",
       "success": "#39d8a3",
       "info": "#1f7bf7",
-      "error-dark": "#6b1f24",
-      "warning-dark": "#6a4a3a",
-      "success-dark": "#1b5a4a",
-      "info-dark": "#1b4a6b"
+      "error-dark": "#b82e3a",
+      "warning-dark": "#cc6320",
+      "success-dark": "#1e7f5f",
+      "info-dark": "#2164bb"
     },
     "inverse": {
       "error-light": "#280606",
@@ -669,18 +670,18 @@ export const tokens = {
       "success-dark": "#3fd597",
       "info-dark": "#74aaf1"
     },
-    "error-light": "#ffecee",
+    "error-light": "#ffe9ea",
     "success": "#39d8a3",
     "info": "#1f7bf7",
     "error": "#ff4454",
-    "warning-light": "#fff6f0",
+    "warning-light": "#fff3d2",
     "warning": "#ffa268",
-    "success-light": "#ebfbf6",
-    "info-light": "#e9f2fe",
-    "error-dark": "#6b1f24",
-    "warning-dark": "#6a4a3a",
-    "success-dark": "#1b5a4a",
-    "info-dark": "#1b4a6b"
+    "success-light": "#d7f7ed",
+    "info-light": "#ddebfe",
+    "error-dark": "#b82e3a",
+    "warning-dark": "#cc6320",
+    "success-dark": "#1e7f5f",
+    "info-dark": "#2164bb"
   },
   "background": {
     "main": {

@@ -573,6 +573,10 @@
     "xs": {
       "$type": "fontSizes",
       "$value": "roundTo({fontSizes.body} * 0.75)"
+    },
+    "keyFig": {
+      "$type": "fontSizes",
+      "$value": "28"
     }
   }
 }

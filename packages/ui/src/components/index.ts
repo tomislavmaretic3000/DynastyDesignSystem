@@ -168,3 +168,6 @@ export type {
 
 export { SegmentedTabs } from './SegmentedTabs'
 export type { SegmentedTabItem } from './SegmentedTabs'
+
+export { CollapsibleSection } from './CollapsibleSection'
+export { ManagedListItem } from './ManagedListItem'

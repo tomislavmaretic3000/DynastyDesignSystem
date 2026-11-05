@@ -1,19 +1,24 @@
 import { createTheme, Fade } from '@mui/material'
 import type { ThemeOptions, Shadows } from '@mui/material/styles'
+import type { CSSProperties } from 'react'
 
 declare module '@mui/material/styles' {
   interface Palette { neutral: Palette['primary'] }
   interface PaletteOptions { neutral?: PaletteOptions['primary'] }
+  interface TypographyVariants { keyFig: CSSProperties }
+  interface TypographyVariantsOptions { keyFig?: CSSProperties }
 }
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides { neutral: true }
 }
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides { keyFig: true }
+}
 import '@mui/x-date-pickers/themeAugmentation'
 import {
   CaretDown, Triangle,
-  Square,
-  CheckSquare,
-  MinusSquare,
+  Check,
+  Minus,
   CheckCircle,
   Warning,
   XCircle,
@@ -44,11 +49,27 @@ const shadowOpacity = {
 // Shared height token for all small-size form controls and control-like elements
 export const controlHeightSm = 40
 
-// Row height for data tables — spacing(5)
-export const dataGridRowHeight = 44
+// Row height for data tables — matches DataGrid's actual auto-computed row
+// height (cell padding + line-height), kept in sync for any component that
+// needs to align its own row height to the grid (e.g. drawer detail lists)
+export const dataGridRowHeight = 42
 
 // Spacing between a form label and its field — spacing(1.5)
 export const formLabelGap = 1.5
+
+// Spacing between a primary line (e.g. a title) and secondary helper text below it
+export const helperTextGap = 0
+
+// Width for right-anchored detail/panel drawers — consistent across all such drawers
+export const detailDrawerWidth = 600
+
+// Shared "selected" color for controls that indicate an active/checked/favorited
+// state via icon or fill color (Checkbox, Switch track, favorite Star, etc.) —
+// single source of truth so parallel selection indicators stay visually aligned
+export const selectedColor = tokens.icon.main.primary.primary
+
+// Counterpart muted/unselected color for the same family of controls
+export const mutedIconColor = tokens.icon.main.base.subtle
 
 // midnight-900 (#020c33) broken out as RGB for rgba() usage
 const sRgb = '2, 12, 51'
@@ -197,17 +218,24 @@ const themeOptions: ThemeOptions = {
     body1: {
       fontFamily: `"Geist", sans-serif`,
       fontSize: Number(tokens.fontSizes.body),
-      lineHeight: 1.6,
+      lineHeight: 1.4,
     },
     body2: {
       fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.sm,
-      lineHeight: 1.5,
+      lineHeight: 1.4,
     },
     caption: {
       fontFamily: `"Geist", sans-serif`,
       fontSize: tokens.fontSizes.xs,
       lineHeight: 1.4,
+    },
+    // Large standalone figures (dashboard stat cards, KPI totals) — tabular-nums
+    // keeps digits a fixed width so a column of figures doesn't jitter.
+    keyFig: {
+      fontFamily: `"Geist", sans-serif`,
+      fontSize: Number(tokens.fontSizes.keyFig),
+      fontVariantNumeric: 'tabular-nums',
     },
     overline: {
       fontFamily: `"Geist", sans-serif`,
@@ -262,6 +290,9 @@ const themeOptions: ThemeOptions = {
             color: tokens.colors.midnight[700],
           },
         },
+        sizeSmall: {
+          padding: tokens.spacing[4],
+        },
       },
     },
     MuiButton: {
@@ -294,6 +325,14 @@ const themeOptions: ThemeOptions = {
         },
         containedPrimary: {
           '&:hover': { backgroundColor: tokens.colors.midnight[700] },
+        },
+        startIcon: {
+          color: tokens.fg.muted,
+          '& > svg': { width: 16, height: 16 },
+        },
+        endIcon: {
+          color: tokens.fg.muted,
+          '& > svg': { width: 16, height: 16 },
         },
       },
     },
@@ -386,6 +425,17 @@ const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          // MUI bumps padding-bottom to 24px on a CardContent that's the
+          // last child of its Card — keep all four sides equal instead
+          '&:last-child': {
+            paddingBottom: tokens.spacing[16],
+          },
+        },
+      },
+    },
     MuiChip: {
       styleOverrides: {
         root: ({ ownerState }: { ownerState: { color?: string; variant?: string } }) => ({
@@ -393,20 +443,20 @@ const themeOptions: ThemeOptions = {
           maxWidth: '100%',
           overflow: 'hidden',
           ...(ownerState.variant !== 'outlined' && ownerState.color === 'success' && {
-            backgroundColor: tokens.functional.main.success,
-            color: tokens.colors.base.white,
+            backgroundColor: tokens.functional.main['success-light'],
+            color: tokens.functional.main['success-dark'],
           }),
           ...(ownerState.variant !== 'outlined' && ownerState.color === 'error' && {
-            backgroundColor: tokens.functional.main.error,
-            color: tokens.colors.base.white,
+            backgroundColor: tokens.functional.main['error-light'],
+            color: tokens.functional.main['error-dark'],
           }),
           ...(ownerState.variant !== 'outlined' && ownerState.color === 'warning' && {
-            backgroundColor: tokens.functional.main.warning,
-            color: tokens.colors.midnight[900],
+            backgroundColor: tokens.functional.main['warning-light'],
+            color: tokens.functional.main['warning-dark'],
           }),
           ...(ownerState.variant !== 'outlined' && ownerState.color === 'info' && {
-            backgroundColor: tokens.functional.main.info,
-            color: tokens.colors.base.white,
+            backgroundColor: tokens.functional.main['info-light'],
+            color: tokens.functional.main['info-dark'],
           }),
           ...(ownerState.variant !== 'outlined' && ownerState.color === 'primary' && {
             backgroundColor: tokens.background.main.primary.light,
@@ -414,15 +464,15 @@ const themeOptions: ThemeOptions = {
           }),
         }),
         label: {
-          paddingLeft: tokens.spacing[10],
-          paddingRight: tokens.spacing[10],
+          paddingLeft: tokens.spacing[8],
+          paddingRight: tokens.spacing[8],
           fontSize: tokens.fontSizes.sm,
           fontWeight: 400,
           lineHeight: 1,
         },
         labelSmall: {
-          paddingLeft: tokens.spacing[8],
-          paddingRight: tokens.spacing[8],
+          paddingLeft: tokens.spacing[6],
+          paddingRight: tokens.spacing[6],
           fontSize: tokens.fontSizes.xs,
           fontWeight: 400,
           lineHeight: 1,
@@ -440,22 +490,65 @@ const themeOptions: ThemeOptions = {
         styleOverrides: {
           root: {
             '& .MuiDataGrid-columnHeaders': {
-              backgroundColor: tokens.colors.zinc[50],
-              borderBottom: `1px solid ${tokens.colors.zinc[300]}`,
+              backgroundColor: 'transparent',
+              borderTop: `1px solid ${tokens.border.main.default}`,
+              borderBottom: `1px solid ${tokens.colors.zinc[400]}`,
             },
             '& .MuiDataGrid-columnHeader': {
-              backgroundColor: tokens.colors.zinc[50],
+              paddingTop: tokens.spacing[8],
+              paddingBottom: tokens.spacing[8],
+              paddingLeft: 0,
+              paddingRight: 0,
+              borderRadius: 0,
             },
             '& .MuiDataGrid-columnHeaderTitle': {
               fontSize: tokens.fontSizes.sm,
               fontWeight: 400,
               color: tokens.fg.muted,
             },
+            // Sort icon + menu icon — same zinc grey, same size
+            '& .MuiDataGrid-sortIcon': {
+              color: tokens.colors.zinc[400],
+              fontSize: tokens.fontSizes.sm,
+              opacity: 1,
+            },
+            '& .MuiDataGrid-iconButtonContainer': {
+              visibility: 'visible',
+              '& button': {
+                color: tokens.colors.zinc[400],
+                padding: tokens.spacing[4],
+                '&:hover': {
+                  color: tokens.colors.zinc[600],
+                  backgroundColor: 'transparent',
+                },
+              },
+            },
+            '& .MuiDataGrid-menuIcon': {
+              marginLeft: 0,
+              '& button': {
+                color: tokens.colors.zinc[400],
+                fontSize: tokens.fontSizes.sm,
+                padding: tokens.spacing[4],
+                '&:hover': {
+                  color: tokens.colors.zinc[600],
+                  backgroundColor: 'transparent',
+                },
+              },
+            },
+            // Remove focus outlines
+            '& .MuiDataGrid-cell:focus, & .MuiDataGrid-cell:focus-within': {
+              outline: 'none',
+            },
+            '& .MuiDataGrid-columnHeader:focus, & .MuiDataGrid-columnHeader:focus-within': {
+              outline: 'none',
+            },
             '& .MuiDataGrid-cell': {
               fontSize: tokens.fontSizes.sm,
               alignItems: 'flex-start',
-              paddingTop: tokens.spacing[10],
-              paddingBottom: tokens.spacing[10],
+              paddingTop: tokens.spacing[8],
+              paddingBottom: tokens.spacing[8],
+              paddingLeft: 0,
+              paddingRight: 0,
               whiteSpace: 'normal',
               wordBreak: 'break-word',
               lineHeight: 1.5,
@@ -470,6 +563,19 @@ const themeOptions: ThemeOptions = {
             '&.MuiDataGrid-root .MuiDataGrid-row.Mui-selected:hover': {
               backgroundColor: tokens.colors.zinc[200],
             },
+            // Summary/total row — opt in via getRowClassName={() => 'DynastyDataGrid-totalRow'}
+            '& .DynastyDataGrid-totalRow': {
+              backgroundColor: tokens.colors.zinc[100],
+              fontWeight: 600,
+              '& .MuiDataGrid-cell': {
+                borderTop: `1px solid ${tokens.colors.zinc[400]}`,
+              },
+            },
+            // Icons/checkboxes align to the top of the cell, not centered —
+            // matters once cell content wraps to multiple lines
+            '& .MuiDataGrid-cell .MuiIconButton-root, & .MuiDataGrid-cell .MuiCheckbox-root': {
+              alignSelf: 'flex-start',
+            },
           },
         },
       },
@@ -479,8 +585,22 @@ const themeOptions: ThemeOptions = {
         transitionDuration: { enter: 300, exit: 220 },
       },
       styleOverrides: {
-        paper: {
+        paper: ({ ownerState }: { ownerState: { anchor?: string } }) => ({
           transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1) !important',
+          ...(ownerState.anchor === 'right' && {
+            width: detailDrawerWidth,
+            display: 'flex',
+            flexDirection: 'column',
+          }),
+        }),
+      },
+    },
+    MuiCollapse: {
+      defaultProps: {
+        timeout: { enter: 300, exit: 220 },
+        easing: {
+          enter: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          exit: 'cubic-bezier(0.22, 1, 0.36, 1)',
         },
       },
     },
@@ -519,6 +639,16 @@ const themeOptions: ThemeOptions = {
       },
     },
     MuiSwitch: {
+      defaultProps: {
+        // MUI's own Switch.js bakes a `color:'primary'` variant that sets the
+        // checked track's background via a high-specificity nested selector
+        // (`.MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track`), which
+        // beats a plain track-slot override — the same class of specificity
+        // trap as the small-size padding/thumb issue above. 'default' isn't
+        // a real palette entry, so no such variant is generated, and our own
+        // track styleOverrides apply uncontested.
+        color: 'default',
+      },
       styleOverrides: {
         root: ({ ownerState }: { ownerState: { size?: string } }) => ({
           width: tokens.spacing[52],
@@ -529,9 +659,29 @@ const themeOptions: ThemeOptions = {
           ...(ownerState.size === 'small' && {
             width: tokens.spacing[36],
             height: tokens.spacing[20] + 2, // 22px: thumb(18) + padding(2)*2
+            // MUI's own Switch.js bakes the small-size switchBase padding and
+            // checked transform into the root's `size:small` variant via this
+            // same nested selector, which outranks a plain switchBase-slot
+            // override on specificity. Matching that shape here is the only
+            // way to actually win the cascade (theme overrides are inserted
+            // after component variants, so equal-specificity rules resolve
+            // in our favor).
+            '& .MuiSwitch-switchBase': {
+              padding: tokens.spacing[2],
+              '&.Mui-checked': {
+                transform: `translateX(${tokens.spacing[14]}px)`,
+              },
+            },
+            // Same specificity trap for the thumb: MUI's size:small variant
+            // also hardcodes `& .MuiSwitch-thumb { width:16, height:16 }`
+            // here, which otherwise beats the thumb slot's own override.
+            '& .MuiSwitch-thumb': {
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+            },
           }),
         }),
-        switchBase: ({ ownerState }: { ownerState: { size?: string } }) => ({
+        switchBase: {
           padding: tokens.spacing[2] + 1,
           margin: 0,
           '&.Mui-checked': {
@@ -539,31 +689,20 @@ const themeOptions: ThemeOptions = {
             transform: `translateX(${tokens.spacing[20]}px)`,
             margin: 0,
           },
-          ...(ownerState.size === 'small' && {
-            padding: tokens.spacing[2],
-            '&.Mui-checked': {
-              transform: `translateX(${tokens.spacing[14]}px)`,
-            },
-          }),
-        }),
-        thumb: ({ ownerState }: { ownerState: { size?: string } }) => ({
+        },
+        thumb: {
           width: 26,
           height: 26,
           backgroundColor: tokens.colors.base.white,
-          boxShadow: `0 2px 4px rgba(${sRgb}, 0.15)`,
-          ...(ownerState.size === 'small' && {
-            width: tokens.spacing[18],
-            height: tokens.spacing[18],
-            boxShadow: `0 1px 3px rgba(${sRgb}, 0.15)`,
-          }),
-        }),
+          boxShadow: 'none',
+        },
         track: {
           borderRadius: tokens.spacing[16],
           opacity: 0.35,
-          backgroundColor: tokens.colors.midnight[500],
+          backgroundColor: selectedColor,
           '.Mui-checked + &': {
             opacity: 1,
-            backgroundColor: tokens.colors.midnight[500],
+            backgroundColor: selectedColor,
           },
         },
       },
@@ -618,29 +757,66 @@ const themeOptions: ThemeOptions = {
     MuiTableCell: {
       styleOverrides: {
         root: {
+          fontSize: tokens.fontSizes.sm,
+          paddingTop: tokens.spacing[8],
+          paddingBottom: tokens.spacing[8],
+          paddingLeft: 0,
+          paddingRight: 0,
+          verticalAlign: 'top',
+          lineHeight: 1.5,
           borderBottom: `1px solid ${tokens.border.main.default}`,
           borderLeft: 'none',
           borderRight: 'none',
         },
         head: {
-          backgroundColor: tokens.colors.zinc[50],
-          fontWeight: 600,
-          borderBottom: `1px solid ${tokens.colors.zinc[300]}`,
+          fontWeight: 400,
+          color: tokens.fg.muted,
+          verticalAlign: 'middle',
+          borderTop: `1px solid ${tokens.border.main.default}`,
+          borderBottom: `1px solid ${tokens.colors.zinc[400]}`,
+          '&:focus': { outline: 'none' },
         },
       },
     },
     MuiTableRow: {
       styleOverrides: {
         root: {
+          backgroundColor: tokens.background.main.base.white,
           '&:hover': {
             backgroundColor: tokens.colors.zinc[50],
           },
           '&.Mui-selected': {
-            backgroundColor: tokens.colors.midnight[100],
+            backgroundColor: tokens.colors.zinc[100],
             '&:hover': {
-              backgroundColor: tokens.colors.midnight[150],
+              backgroundColor: tokens.colors.zinc[200],
             },
           },
+        },
+      },
+    },
+    MuiTableSortLabel: {
+      styleOverrides: {
+        root: {
+          color: tokens.fg.muted,
+          '&:hover': {
+            color: tokens.fg.muted,
+            '& .MuiTableSortLabel-icon': {
+              color: tokens.colors.zinc[600],
+              opacity: 1,
+            },
+          },
+          '&.Mui-active': {
+            color: tokens.fg.muted,
+            '& .MuiTableSortLabel-icon': {
+              color: tokens.colors.zinc[400],
+              opacity: 1,
+            },
+          },
+        },
+        icon: {
+          color: tokens.colors.zinc[400],
+          opacity: 1,
+          fontSize: tokens.fontSizes.sm,
         },
       },
     },
@@ -685,6 +861,14 @@ const themeOptions: ThemeOptions = {
         transitionDuration: { enter: 80, exit: 60 },
         TransitionComponent: Fade,
       },
+      styleOverrides: {
+        paper: {
+          border: `1px solid ${tokens.border.main.default}`,
+        },
+        list: {
+          padding: tokens.spacing[2],
+        },
+      },
     },
     MuiPopover: {
       defaultProps: {
@@ -697,6 +881,12 @@ const themeOptions: ThemeOptions = {
         root: {
           fontSize: tokens.fontSizes.sm,
           color: tokens.fg.muted,
+          margin: tokens.spacing[2],
+          paddingTop: tokens.spacing[4],
+          paddingBottom: tokens.spacing[4],
+          paddingLeft: tokens.spacing[8],
+          paddingRight: tokens.spacing[8],
+          borderRadius: tokens.radius['rounded-md'],
         },
       },
     },
@@ -717,21 +907,57 @@ const themeOptions: ThemeOptions = {
     MuiCheckbox: {
       defaultProps: {
         disableRipple: true,
-        icon: <Square size={22} weight="light" />,
-        checkedIcon: <CheckSquare size={22} weight="fill" />,
-        indeterminateIcon: <MinusSquare size={22} weight="fill" />,
+        // Phosphor's square glyphs are a single flat color, so a filled box
+        // with a contrasting icon (checked/indeterminate) needs composing by
+        // hand — icon/checkedIcon/indeterminateIcon each render a fixed,
+        // non-reactive element, so the three states are three separate spans
+        // sharing one size/radius rather than one component branching on props.
+        icon: (
+          <span
+            style={{
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+              borderRadius: tokens.radius.rounded,
+              border: `1.5px solid ${mutedIconColor}`,
+              boxSizing: 'border-box',
+            }}
+          />
+        ),
+        checkedIcon: (
+          <span
+            style={{
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+              borderRadius: tokens.radius.rounded,
+              backgroundColor: selectedColor,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Check size={12} weight="bold" color={tokens.colors.base.white} />
+          </span>
+        ),
+        indeterminateIcon: (
+          <span
+            style={{
+              width: tokens.spacing[18],
+              height: tokens.spacing[18],
+              borderRadius: tokens.radius.rounded,
+              backgroundColor: selectedColor,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Minus size={12} weight="bold" color={tokens.colors.base.white} />
+          </span>
+        ),
       },
       styleOverrides: {
-        root: ({ ownerState }: { ownerState: { checked?: boolean; indeterminate?: boolean } }) => ({
+        root: {
           padding: 0,
-          color: (ownerState.checked || ownerState.indeterminate)
-            ? tokens.colors.midnight[500]
-            : tokens.colors.zinc[400],
-          '&:hover': {
-            backgroundColor: 'transparent',
-            color: tokens.colors.midnight[500],
-          },
-        }),
+        },
       },
     },
     MuiSkeleton: {
@@ -790,6 +1016,9 @@ const themeOptions: ThemeOptions = {
       },
     },
     MuiLink: {
+      defaultProps: {
+        underline: 'hover',
+      },
       styleOverrides: {
         root: {
           color: tokens.functional.main.info,
