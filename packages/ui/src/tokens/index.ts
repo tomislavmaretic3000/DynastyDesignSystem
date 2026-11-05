@@ -374,7 +374,8 @@ export const tokens = {
     "h6": "16",
     "body": "16",
     "sm": 14,
-    "xs": 12
+    "xs": 12,
+    "keyFig": "28"
   },
   "fg": {
     "default": "#000000",
